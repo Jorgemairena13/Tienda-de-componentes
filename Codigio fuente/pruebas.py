@@ -22,22 +22,38 @@ titulo = r"""[bright_blue]
 
 #Creamos el menu
 menu_contenido = """
+[bold cyan]
+                                Opcion 1 - Gestion clientes
+
+                                Opcion 2 - Gestion inventario
+
+                                Opcion 3 - Ventas
+
+                                Opcion 4 - Facturacion
+
+                                Opcion 5 - Reportes
+
+                                Opcion 6 - Salir
+[/bold cyan]
+[bold red]     
+                                Elige una opcion:  
+[/bold red]    
+
+                            
+"""
+menu_opcion_1 = """
  [bold cyan]
-                            Opcion 1 - Gestion clientes
+        Opcion 1 - Añadir cliente
 
-                            Opcion 2 - Gestion inventario
+        Opcion 2 - Eliminar cliente
 
-                            Opcion 3 - Ventas
+        Opcion 3 - Ver datos cliente
 
-                            Opcion 4 - Facturacion
+        Opcion 4 - Salir [/bold cyan]
+[bold red]
+        Elige una opcion: 
+[/bold red]    
 
-                            Opcion 5 - Reportes
-
-                            Opcion 6 - Salir[/bold cyan]
-                            
-                       [bold red]     Elige una opcion:  [/bold red]    
-
-                            
 """
 
 #Combinamos el menu y el titulo
@@ -51,9 +67,14 @@ menu_panel = Panel(
     border_style="blue"
 )
 
+menu_panel2 = Panel(
+    Align.center(menu_opcion_1),
+    border_style="blue",
+    title="Gestion de clientes"
+    )
 
 style = Style.from_dict({
-    'prompt': 'bold orange',  # Usa 'orange' en lugar de '#ansi208'
+    'prompt': 'bold orange',  
     '': 'cyan bold',
 })
 
@@ -63,12 +84,34 @@ style = Style.from_dict({
 
 texto_usuario = None
 
-while texto_usuario !=4:
+while texto_usuario !=6:
 #Sacamos por la terminal
     console.print(menu_panel)
 
     texto_usuario = int(prompt('', style=style))
+    system("cls")
+
+    if texto_usuario == 1:
+        console.print(menu_panel2)
+
+    elif texto_usuario == 2:
+        console.print(menu_panel2)
+    
+    elif texto_usuario == 3:
+        console.print(menu_panel2)
+    
+    elif texto_usuario == 4:
+        console.print(menu_panel2)
+    
+    elif texto_usuario == 5:
+        console.print(menu_panel2)
+         
+    
+    
 
 
 
-    input()
+
+
+
+input()

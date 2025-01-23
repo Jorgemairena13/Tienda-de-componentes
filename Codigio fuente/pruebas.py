@@ -10,6 +10,7 @@ from rich.table import Table
 
 console = Console()
 
+
 #Creamos el titulo
 titulo = r"""[bright_blue]
      ____                                             _            ____               
@@ -39,9 +40,14 @@ menu_contenido = """
 [bold red]     
                                 Elige una opcion:  
 [/bold red]    
-
                             
 """
+
+#Combinamos el menu y el titulo
+menu_combinado = f"{titulo}\n\n{menu_contenido}"
+
+
+#Aqui vamos a hacer los menus de las diferentes opciones
 menu_opcion_1 = """
  [bold cyan]
         Opcion 1 - Añadir cliente
@@ -58,23 +64,49 @@ menu_opcion_1 = """
 [/bold red]    
 
 """
+menu_opcion_2 = """
+[bold cyan]
+Opción 1 - Añadir producto
 
-#Combinamos el menu y el titulo
-menu_combinado = f"{titulo}\n\n{menu_contenido}"
+Opción 2 - Eliminar producto
+
+Opción 3 - Ver detalles de producto
+
+Opción 4 - Lista de todos los productos
+
+Opción 5 - Buscar producto
+
+Opción 6 - Salir
+[/bold cyan]
+
+[bold red]
+Elige una opción:
+[/bold red]
+
+"""
+
+
+
 
 
 
 #Aqui le aplicamos las propiedades al menu
-menu_panel = Panel(
+menu_principal = Panel(
     Align.center(menu_combinado),
     border_style="blue"
 )
 #Propiedades para el menu de la opcion 1
-menu_panel2 = Panel(
+menu_panel1 = Panel(
     Align.center(menu_opcion_1),
     border_style="blue",
     title="Gestion de clientes"
     )
+menu_panel2 = Panel(
+    Align.center(menu_opcion_2),
+    border_style="blue",
+    title="Gestion de productos"
+    )
+
 #Estilo para los prompt
 style = Style.from_dict({
     'prompt': 'bold orange',  
@@ -83,12 +115,32 @@ style = Style.from_dict({
 
 #Diccionario para ir añadiendo los clientes con sus datos
 clientes = {}
+#Diccionario para ir añadiendo los articulos 
+
+articulos = {
+    "id_1": {"nombre": "Procesador", "precio": 100},
+
+    "id_2": {"nombre": "Tarjeta gráfica", "precio": 200},
+
+    "id_3": {"nombre": "Memoria RAM", "precio": 80},
+
+    "id_4": {"nombre": "Disco Duro", "precio": 60},
+
+    "id_5": {"nombre": "SSD", "precio": 120},
+
+    "id_6": {"nombre": "Placa Base", "precio": 150},
+
+    "id_7": {"nombre": "Fuente de Alimentación", "precio": 70},
+
+    "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50}
+}
+
 
 texto_usuario = None
 
 while texto_usuario !=6:
 #Sacamos por la terminal
-    console.print(menu_panel)
+    console.print(menu_principal)
 
     texto_usuario = prompt('', style=style)
     system("cls")
@@ -98,11 +150,12 @@ while texto_usuario !=6:
         if texto_usuario == 1:
             while True:
 
-                console.print(menu_panel2)
+                console.print(menu_panel1)
                 opcion = prompt('', style=style)
-                
-                if opcion.isdigit():
-                    opcion = int(opcion)
+                #Comprobamos que es un numero
+                if opcion.isdigit(): 
+                    opcion = int(opcion) #Convertimos a digito 
+
                     if opcion == 1:
                         # Añadir cliente
                         console.log('Introduzca NIF: ', style='yellow')
@@ -119,6 +172,7 @@ while texto_usuario !=6:
                         }
                         print("Cliente añadido correctamente")
 
+
                     elif opcion == 2:
                         # Eliminar cliente
                         nif = input('Introduzca NIF del cliente a eliminar:\n')
@@ -129,6 +183,8 @@ while texto_usuario !=6:
                         else:
                             console.log("[bold yellow]Cliente no encontrado[/bold yellow]")
                         input('Enter para continuar')
+
+
                     elif opcion == 3:
                         # Mostrar cliente concreto que quiera 
                         nif = input("Introduzca NIF del cliente: ")
@@ -137,6 +193,8 @@ while texto_usuario !=6:
                         else:
                             print("Cliente no encontrado")
                         input("Enter para continuar")
+                        
+
 
                     elif opcion == 4:
                         #Creamos la tabla
@@ -167,15 +225,85 @@ while texto_usuario !=6:
                         break
                 else:
                     console.print("[red]No has introducido un numero. Introduce un número.[/red]")
+                input()
                 system("cls")
 
 
 
 
-
+        #Opcion 2 del menu principal
         elif texto_usuario == 2:
-            console.print(menu_panel2)
+            #Creamos el bucle para que este siempre abierta 
+            while True:
+                console.print(menu_panel2) #Mostramos menu
+                opcion = prompt("", style=style)
+
+                if  opcion.isdigit():
+
+                    opcion = int(opcion)
+
+                    if opcion == 1: #Opcion para añadir un producto nuevo
+                        id = input("Que producto vas a añadir")
+
+                        articulos[id] = {
+
+                             "nombre": input("Nombre producto"),
+                             "precio": int(input("Precio: ")),
+                             
+                        }
+                        print(articulos[id])
+                        input()
+
+
+                    elif opcion == 2:# Opcion para eliminar producto
+                        id = input('Introduzca id del articulo a eliminar:\n')
+                        if id in articulos:
+                            console.log("[bold red]Articulo eliminado[/bold red]")
+                            console.log(articulos[id], style="Red")
+                            del articulos[id]
+                        else:
+                            console.log("[bold yellow]Articulo no encontrado[/bold yellow]")
+                        input('Enter para continuar')
+
+                    elif opcion == 3: #Ver los detalles del producto
+                        console.log("Ver detalles de productos")
+
+                    elif opcion == 4: #Ver la lista de los productos
+                       
+                        tabla = Table(title="Productos",  show_header=True, border_style='bold cyan')
+
+                        #Añadimos columnas
+                        tabla.add_column("ID", style="bold cyan", justify="'right")
+                        tabla.add_column("Nombre producto", style="magenta", justify="center")
+                        tabla.add_column("Precio", style="magenta", justify="center")
+                        
+                        #Bucle para ver los datos de los clientes
+                        for id, datos in articulos.items():
+                            tabla.add_row(
+                            str(id),                         # ID del artículo
+                            datos['nombre'],         # Nombre del producto
+                            f"€{datos['precio']}")   # Precio con símbolo de euro
+                     
+                           
+
+                    
+
+                        console.print(tabla)
+                        input()
+
+                    elif opcion == 5: #Buscar productos
+                        console.log("Buscar productos")
+
+
+                else:
+                    console.log("Por favor introduce un numero", style= "bold red")
+
+
+                input()    
+                system("cls")
         
+
+
         elif texto_usuario == 3:
             console.print(menu_panel2)
         

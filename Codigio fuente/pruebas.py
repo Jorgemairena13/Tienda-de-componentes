@@ -33,9 +33,7 @@ menu_contenido = """
 
                                 Opcion 4 - Facturacion
 
-                                Opcion 5 - Reportes
-
-                                Opcion 6 - Salir
+                                Opcion 5 - Salir
 [/bold cyan]
 [bold red]     
                                 Elige una opcion:  
@@ -70,13 +68,9 @@ Opción 1 - Añadir producto
 
 Opción 2 - Eliminar producto
 
-Opción 3 - Ver detalles de producto
+Opción 3 - Lista de todos los productos
 
-Opción 4 - Lista de todos los productos
-
-Opción 5 - Buscar producto
-
-Opción 6 - Salir
+Opción 4 - Salir
 [/bold cyan]
 
 [bold red]
@@ -95,17 +89,20 @@ menu_principal = Panel(
     Align.center(menu_combinado),
     border_style="blue"
 )
+
 #Propiedades para el menu de la opcion 1
 menu_panel1 = Panel(
     Align.center(menu_opcion_1),
     border_style="blue",
     title="Gestion de clientes"
     )
+
 menu_panel2 = Panel(
     Align.center(menu_opcion_2),
     border_style="blue",
     title="Gestion de productos"
     )
+
 
 #Estilo para los prompt
 style = Style.from_dict({
@@ -113,26 +110,28 @@ style = Style.from_dict({
     '': 'cyan bold',
 })
 
+
 #Diccionario para ir añadiendo los clientes con sus datos
 clientes = {}
+
+
 #Diccionario para ir añadiendo los articulos 
-
 articulos = {
-    "id_1": {"nombre": "Procesador", "precio": 100},
+    "id_1": {"nombre": "Procesador", "precio": 100 , "Stock":50 },
 
-    "id_2": {"nombre": "Tarjeta gráfica", "precio": 200},
+    "id_2": {"nombre": "Tarjeta gráfica", "precio": 200 , "Stock":40 },
 
-    "id_3": {"nombre": "Memoria RAM", "precio": 80},
+    "id_3": {"nombre": "Memoria RAM", "precio": 80 , "Stock":100 },
 
-    "id_4": {"nombre": "Disco Duro", "precio": 60},
+    "id_4": {"nombre": "Disco Duro", "precio": 60 ,"Stock":200 },
 
-    "id_5": {"nombre": "SSD", "precio": 120},
+    "id_5": {"nombre": "SSD", "precio": 120 , "Stock":50 },
 
-    "id_6": {"nombre": "Placa Base", "precio": 150},
+    "id_6": {"nombre": "Placa Base", "precio": 150 , "Stock":100 },
 
-    "id_7": {"nombre": "Fuente de Alimentación", "precio": 70},
+    "id_7": {"nombre": "Fuente de Alimentación", "precio": 70 , "Stock":100 },
 
-    "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50}
+    "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50 , "Stock":35 }
 }
 
 
@@ -182,8 +181,7 @@ while texto_usuario !=6:
                             del clientes[nif]
                         else:
                             console.log("[bold yellow]Cliente no encontrado[/bold yellow]")
-                        input('Enter para continuar')
-
+                        
 
                     elif opcion == 3:
                         # Mostrar cliente concreto que quiera 
@@ -192,7 +190,7 @@ while texto_usuario !=6:
                             print(clientes[nif])
                         else:
                             print("Cliente no encontrado")
-                        input("Enter para continuar")
+                        
                         
 
 
@@ -206,9 +204,10 @@ while texto_usuario !=6:
                         tabla.add_column("Nombre", style="magenta", justify="center")
                         tabla.add_column("Telefono", style="magenta", justify="center")
                         tabla.add_column("Dirrecion", style="magenta", justify="right")
+
+
                         #Bucle para ver los datos de los clientes
                         for nif, datos in clientes.items():
-                            
                              tabla.add_row(
                         str(nif),                     # Convierte nif a string
                         datos['nombre'],     # Accede al nombre del diccionario
@@ -216,19 +215,17 @@ while texto_usuario !=6:
                         datos["direccion"]    # Acceder a la dirrecion
 
                     )
-
+                        #Mostramos la tabla
                         console.print(tabla)
-                        input()
+                        
                             
 
                     elif opcion == 5:
                         break
-                else:
+                else: #Mensaje por si nos da algo que no sea un numero
                     console.print("[red]No has introducido un numero. Introduce un número.[/red]")
-                input()
+                input("Presiona enter")
                 system("cls")
-
-
 
 
         #Opcion 2 del menu principal
@@ -238,21 +235,23 @@ while texto_usuario !=6:
                 console.print(menu_panel2) #Mostramos menu
                 opcion = prompt("", style=style)
 
-                if  opcion.isdigit():
+                if  opcion.isdigit(): #Comprobamos que lo que a introducido es un digito
 
-                    opcion = int(opcion)
+                    opcion = int(opcion) #Le cambiamos el tipo de str a numero
 
                     if opcion == 1: #Opcion para añadir un producto nuevo
-                        id = input("Que producto vas a añadir")
+                        id = input("ID del producto a añadir")
 
+                        #Añadimos al diccionario el articulo con el id que queramos
                         articulos[id] = {
 
                              "nombre": input("Nombre producto"),
                              "precio": int(input("Precio: ")),
+                             "Stock": int(input("Stock: ")),
                              
                         }
                         print(articulos[id])
-                        input()
+                       
 
 
                     elif opcion == 2:# Opcion para eliminar producto
@@ -263,55 +262,56 @@ while texto_usuario !=6:
                             del articulos[id]
                         else:
                             console.log("[bold yellow]Articulo no encontrado[/bold yellow]")
-                        input('Enter para continuar')
+                        
 
-                    elif opcion == 3: #Ver los detalles del producto
-                        console.log("Ver detalles de productos")
-
-                    elif opcion == 4: #Ver la lista de los productos
-                       
+                    elif opcion == 3: #Ver la lista de los productos
+                       #Creamos la tabla de los producto
                         tabla = Table(title="Productos",  show_header=True, border_style='bold cyan')
 
                         #Añadimos columnas
                         tabla.add_column("ID", style="bold cyan", justify="'right")
                         tabla.add_column("Nombre producto", style="magenta", justify="center")
                         tabla.add_column("Precio", style="magenta", justify="center")
+                        tabla.add_column("Stock", style="magenta", justify="center")
                         
+
+
                         #Bucle para ver los datos de los clientes
                         for id, datos in articulos.items():
                             tabla.add_row(
-                            str(id),                         # ID del artículo
+                            str(id),                          # ID del artículo
                             datos['nombre'],         # Nombre del producto
-                            f"€{datos['precio']}")   # Precio con símbolo de euro
+                            f"{datos['precio']}€",   # Precio con símbolo de euro
+                            f"{datos["Stock"]}")        #Stock del articulo
                      
-                           
+                        #Mostramos la tabla
+                        console.print(tabla) 
+                        
 
-                    
-
-                        console.print(tabla)
-                        input()
-
-                    elif opcion == 5: #Buscar productos
-                        console.log("Buscar productos")
+                    elif opcion == 4: #Salir del bucle
+                        break
 
 
                 else:
                     console.log("Por favor introduce un numero", style= "bold red")
 
 
-                input()    
+                input("Presiona enter")    
                 system("cls")
         
 
-
+        #Seccion de ventas
         elif texto_usuario == 3:
             console.print(menu_panel2)
         
+        #Seccion de facturacion
         elif texto_usuario == 4:
             console.print(menu_panel2)
-        
+            
+        #Salir del programa
         elif texto_usuario == 5:
-            console.print(menu_panel2)
+            console.log("[bold green] Gracias por usar el programa[/bold green]")
+            break
     else:
         console.print("[red]No has introducido un numero. Introduce un número.[/red]")
     input()

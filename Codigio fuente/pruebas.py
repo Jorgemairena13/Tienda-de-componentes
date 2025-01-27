@@ -78,6 +78,20 @@ Elige una opción:
 [/bold red]
 
 """
+menu_opcion_3 = """
+[bold cyan]
+        Opción 1 - Registrar nueva venta
+
+        Opción 2 - Eliminar venta
+
+        Opción 3 - Ver lista de ventas
+    
+        Opción 4 - Salir
+[/bold cyan]
+[bold red]
+        Elige una opción: 
+[/bold red]    
+"""
 
 
 
@@ -96,9 +110,15 @@ menu_panel1 = Panel(
     border_style="blue",
     title="Gestion de clientes"
     )
-
+#Propiedades para el menu de la opcion 2
 menu_panel2 = Panel(
     Align.center(menu_opcion_2),
+    border_style="blue",
+    title="Gestion de productos"
+    )
+#Propiedades para el menu de la opcion 3
+menu_panel3 = Panel(
+    Align.center(menu_opcion_3),
     border_style="blue",
     title="Gestion de productos"
     )
@@ -112,8 +132,9 @@ style = Style.from_dict({
 
 
 #Diccionario para ir añadiendo los clientes con sus datos
-clientes = {}
+clientes = {
 
+}
 
 #Diccionario para ir añadiendo los articulos 
 articulos = {
@@ -132,6 +153,11 @@ articulos = {
     "id_7": {"nombre": "Fuente de Alimentación", "precio": 70 , "Stock":100 },
 
     "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50 , "Stock":35 }
+}
+
+#Diccionario para ir añadiendo los articulos 
+ventas = {
+
 }
 
 
@@ -228,6 +254,7 @@ while texto_usuario !=6:
                 system("cls")
 
 
+
         #Opcion 2 del menu principal
         elif texto_usuario == 2:
             #Creamos el bucle para que este siempre abierta 
@@ -302,8 +329,119 @@ while texto_usuario !=6:
 
         #Seccion de ventas
         elif texto_usuario == 3:
-            console.print(menu_panel2)
+            n_venta = 1  # Contador para las ventas
+
+            while True:
+                console.print(menu_panel3)  # Mostrar el menú de ventas
+                opcion = prompt("", style=style)
+
+                if opcion.isdigit():  # Validar que la entrada sea un número
+                    opcion = int(opcion)
+
+                    if opcion == 1:  # Registrar nueva venta
+                        # Validar cliente
+                        id_cliente = input("Introduce el ID del cliente: ")
+                        if id_cliente not in clientes:
+                            console.print("[bold red]Cliente no encontrado. Por favor, verifica el ID.[/bold red]")
+                            continue
+
+                        # Mostrar lista de productos disponibles
+                        console.print("[bold cyan]Lista de productos disponibles:[/bold cyan]")
+                        tabla = Table(title="Productos Disponibles", show_header=True, border_style='bold cyan')
+                        tabla.add_column("ID", style="cyan")
+                        tabla.add_column("Nombre", style="magenta")
+                        tabla.add_column("Precio", style="green")
+                        tabla.add_column("Stock", style="yellow")
+
+                        for id_producto, datos in articulos.items():
+                            tabla.add_row(id_producto, datos['nombre'], f"{datos['precio']}€", str(datos["Stock"]))
+
+                        console.print(tabla)
+
+                        # Seleccionar producto
+                        id_producto = input("Introduce el ID del producto a vender: ")
+                        if id_producto not in articulos:
+                            console.print("[bold red]Producto no encontrado. Por favor, verifica el ID.[/bold red]")
+                            continue
+
+                        # Verificar stock
+                        if articulos[id_producto]["Stock"] <= 0:
+                            console.print("[bold yellow]No hay suficiente stock para este producto.[/bold yellow]")
+                            continue
+
+                        # Introducir cantidad
+                        cantidad = int(input("Introduce la cantidad a vender: "))
+                        if cantidad > articulos[id_producto]["Stock"]:
+                            console.print("[bold yellow]Stock insuficiente. Solo hay disponible:[/bold yellow]", articulos[id_producto]["Stock"])
+                            continue
+
+                        # Registrar venta
+                        ventas[n_venta] = {
+                            "cliente": clientes[id_cliente]["nombre"],
+                            "producto": articulos[id_producto]["nombre"],
+                            "cantidad": cantidad,
+                            "precio_unitario": articulos[id_producto]["precio"],
+                            "total": cantidad * articulos[id_producto]["precio"]
+                        }
+
+                        # Actualizar stock
+                        articulos[id_producto]["Stock"] -= cantidad
+
+                        console.print(f"[bold green]Venta registrada con éxito. Número de venta: {n_venta}[/bold green]")
+                        n_venta += 1
+
+                    elif opcion == 2:  # Eliminar venta
+                        id_venta = int(input("Introduce el número de la venta a eliminar: "))
+                        if id_venta in ventas:
+                            # Devolver el stock al inventario
+                            producto = ventas[id_venta]["producto"]
+                            cantidad = ventas[id_venta]["cantidad"]
+
+                            for id_producto, datos in articulos.items():
+                                if datos["nombre"] == producto:
+                                    articulos[id_producto]["Stock"] += cantidad
+                                    break
+
+                            del ventas[id_venta]
+                            console.print("[bold red]Venta eliminada correctamente.[/bold red]")
+                        else:
+                            console.print("[bold yellow]Venta no encontrada.[/bold yellow]")
+
+                    elif opcion == 3:  # Ver lista de ventas
+                        if not ventas:
+                            console.print("[bold yellow]No hay ventas registradas.[/bold yellow]")
+                        else:
+                            # Mostrar tabla de ventas
+                            tabla = Table(title="Ventas Registradas", show_header=True, border_style='bold cyan')
+                            tabla.add_column("Número de Venta", style="cyan", justify="center")
+                            tabla.add_column("Cliente", style="magenta")
+                            tabla.add_column("Producto", style="green")
+                            tabla.add_column("Cantidad", style="yellow")
+                            tabla.add_column("Total (€)", style="bold green")
+
+                            for n_venta, datos in ventas.items():
+                                tabla.add_row(
+                                    str(n_venta),
+                                    datos["cliente"],
+                                    datos["producto"],
+                                    str(datos["cantidad"]),
+                                    f"{datos['total']}€"
+                                )
+
+                            console.print(tabla)
+
+                    elif opcion == 4:  # Salir
+                        break
+
+                else:
+                    console.print("[bold red]Introduce un número válido.[/bold red]")
+                    input("Presiona Enter para continuar...")
+                    system("cls")
+
+
         
+
+
         #Seccion de facturacion
         elif texto_usuario == 4:
             console.print(menu_panel2)

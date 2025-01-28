@@ -1,0 +1,17 @@
+{
+    "clientes": {
+        "20889620P": {
+            "nombre": "Jorge",
+            "direccion": "Mairena",
+            "telefono": "648721495"
+        }
+    },
+    "articulos": {
+        "id_1": {
+            "nombre": "Procesador",
+            "precio": 100,
+            "Stock": 50
+        }
+    },
+    "ventas": {}
+}

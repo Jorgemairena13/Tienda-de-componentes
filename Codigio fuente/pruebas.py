@@ -7,7 +7,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.styles import Style
 from os import system
 from rich.table import Table
-
+from datos import cargar_datos, guardar_datos
 console = Console()
 
 
@@ -78,6 +78,9 @@ Elige una opción:
 [/bold red]
 
 """
+
+
+
 menu_opcion_3 = """
 [bold cyan]
         Opción 1 - Registrar nueva venta
@@ -132,34 +135,11 @@ style = Style.from_dict({
 
 
 #Diccionario para ir añadiendo los clientes con sus datos
-clientes = {
 
-}
+clientes, articulos, ventas = cargar_datos()
 
-#Diccionario para ir añadiendo los articulos 
-articulos = {
-    "id_1": {"nombre": "Procesador", "precio": 100 , "Stock":50 },
-
-    "id_2": {"nombre": "Tarjeta gráfica", "precio": 200 , "Stock":40 },
-
-    "id_3": {"nombre": "Memoria RAM", "precio": 80 , "Stock":100 },
-
-    "id_4": {"nombre": "Disco Duro", "precio": 60 ,"Stock":200 },
-
-    "id_5": {"nombre": "SSD", "precio": 120 , "Stock":50 },
-
-    "id_6": {"nombre": "Placa Base", "precio": 150 , "Stock":100 },
-
-    "id_7": {"nombre": "Fuente de Alimentación", "precio": 70 , "Stock":100 },
-
-    "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50 , "Stock":35 }
-}
 
 #Diccionario para ir añadiendo los articulos 
-ventas = {
-
-}
-
 
 texto_usuario = None
 
@@ -196,7 +176,7 @@ while texto_usuario !=6:
                             "telefono": input("Teléfono: ")
                         }
                         print("Cliente añadido correctamente")
-
+                        guardar_datos(clientes,articulos,ventas)
 
                     elif opcion == 2:
                         # Eliminar cliente
@@ -205,6 +185,7 @@ while texto_usuario !=6:
                             console.log("[bold red]Cliente eliminado[/bold red]")
                             console.log(clientes[nif], style="Red")
                             del clientes[nif]
+                            guardar_datos(clientes,articulos,ventas)
                         else:
                             console.log("[bold yellow]Cliente no encontrado[/bold yellow]")
                         
@@ -218,8 +199,6 @@ while texto_usuario !=6:
                             print("Cliente no encontrado")
                         
                         
-
-
                     elif opcion == 4:
                         #Creamos la tabla
                         system('cls')
@@ -278,6 +257,7 @@ while texto_usuario !=6:
                              
                         }
                         print(articulos[id])
+                        guardar_datos(clientes,articulos,ventas)
                        
 
 
@@ -287,6 +267,7 @@ while texto_usuario !=6:
                             console.log("[bold red]Articulo eliminado[/bold red]")
                             console.log(articulos[id], style="Red")
                             del articulos[id]
+                            guardar_datos(clientes,articulos,ventas)
                         else:
                             console.log("[bold yellow]Articulo no encontrado[/bold yellow]")
                         
@@ -301,8 +282,6 @@ while texto_usuario !=6:
                         tabla.add_column("Precio", style="magenta", justify="center")
                         tabla.add_column("Stock", style="magenta", justify="center")
                         
-
-
                         #Bucle para ver los datos de los clientes
                         for id, datos in articulos.items():
                             tabla.add_row(
@@ -329,9 +308,10 @@ while texto_usuario !=6:
 
         #Seccion de ventas
         elif texto_usuario == 3:
-            n_venta = 1  # Contador para las ventas
+
 
             while True:
+                
                 console.print(menu_panel3)  # Mostrar el menú de ventas
                 opcion = prompt("", style=style)
 
@@ -376,6 +356,7 @@ while texto_usuario !=6:
                             continue
 
                         # Registrar venta
+                        n_venta = input("Introduce el número de la venta")
                         ventas[n_venta] = {
                             "cliente": clientes[id_cliente]["nombre"],
                             "producto": articulos[id_producto]["nombre"],
@@ -383,12 +364,16 @@ while texto_usuario !=6:
                             "precio_unitario": articulos[id_producto]["precio"],
                             "total": cantidad * articulos[id_producto]["precio"]
                         }
-
+                        
                         # Actualizar stock
                         articulos[id_producto]["Stock"] -= cantidad
-
+                        
                         console.print(f"[bold green]Venta registrada con éxito. Número de venta: {n_venta}[/bold green]")
-                        n_venta += 1
+                        
+                        guardar_datos(clientes,articulos,ventas)
+                        
+
+
 
                     elif opcion == 2:  # Eliminar venta
                         id_venta = int(input("Introduce el número de la venta a eliminar: "))
@@ -403,10 +388,12 @@ while texto_usuario !=6:
                                     break
 
                             del ventas[id_venta]
+
+                            
                             console.print("[bold red]Venta eliminada correctamente.[/bold red]")
                         else:
                             console.print("[bold yellow]Venta no encontrada.[/bold yellow]")
-
+                        guardar_datos(clientes,articulos,ventas)
                     elif opcion == 3:  # Ver lista de ventas
                         if not ventas:
                             console.print("[bold yellow]No hay ventas registradas.[/bold yellow]")
@@ -429,7 +416,7 @@ while texto_usuario !=6:
                                 )
 
                             console.print(tabla)
-
+                        input("Presiona Enter para continuar...")   
                     elif opcion == 4:  # Salir
                         break
 

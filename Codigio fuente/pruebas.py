@@ -134,25 +134,31 @@ style = Style.from_dict({
 })
 
 
-#Diccionario para ir añadiendo los clientes con sus datos
 
+#Cargar los datos
 clientes, articulos, ventas = cargar_datos()
 
 
-#Diccionario para ir añadiendo los articulos 
+
 
 texto_usuario = None
 
+
+#Bucle para que este siempre abierto
 while texto_usuario !=6:
-#Sacamos por la terminal
+#Mostramos el menu principal
     console.print(menu_principal)
 
+    
+    #Le pediimos al usuario que elija una opcion
     texto_usuario = prompt('', style=style)
     system("cls")
 
     if texto_usuario.isdigit():
         texto_usuario = int(texto_usuario)
         if texto_usuario == 1:
+
+
             while True:
 
                 console.print(menu_panel1)
@@ -416,7 +422,7 @@ while texto_usuario !=6:
                                 )
 
                             console.print(tabla)
-                        input("Presiona Enter para continuar...")   
+                        
                     elif opcion == 4:  # Salir
                         break
 

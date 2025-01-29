@@ -8,7 +8,7 @@ def cargar_datos():
         "clientes": {},
         "articulos": {
             "id_1": {"nombre": "Procesador", "precio": 100, "Stock": 50},
-            # ... resto de productos predeterminados
+            
         },
         "ventas": {},
     }

@@ -20,7 +20,7 @@
         "id_3": {
             "nombre": "Disco duro",
             "precio": 30,
-            "Stock": 27
+            "Stock": 25
         }
     },
     "ventas": {
@@ -44,6 +44,13 @@
             "cantidad": 5,
             "precio_unitario": 200,
             "total": 1000
+        },
+        "4": {
+            "cliente": "Jorge",
+            "producto": "Disco duro",
+            "cantidad": 2,
+            "precio_unitario": 30,
+            "total": 60
         }
     }
 }

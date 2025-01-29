@@ -146,10 +146,10 @@ texto_usuario = None
 
 #Bucle para que este siempre abierto
 while texto_usuario !=6:
+
 #Mostramos el menu principal
     console.print(menu_principal)
 
-    
     #Le pediimos al usuario que elija una opcion
     texto_usuario = prompt('', style=style)
     system("cls")
@@ -160,11 +160,12 @@ while texto_usuario !=6:
 
 
             while True:
-
                 console.print(menu_panel1)
                 opcion = prompt('', style=style)
+
                 #Comprobamos que es un numero
                 if opcion.isdigit(): 
+
                     opcion = int(opcion) #Convertimos a digito 
 
                     if opcion == 1:
@@ -183,6 +184,7 @@ while texto_usuario !=6:
                         }
                         print("Cliente añadido correctamente")
                         guardar_datos(clientes,articulos,ventas)
+
 
                     elif opcion == 2:
                         # Eliminar cliente
@@ -203,7 +205,6 @@ while texto_usuario !=6:
                             print(clientes[nif])
                         else:
                             print("Cliente no encontrado")
-                        
                         
                     elif opcion == 4:
                         #Creamos la tabla
@@ -229,15 +230,13 @@ while texto_usuario !=6:
                         #Mostramos la tabla
                         console.print(tabla)
                         
-                            
-
                     elif opcion == 5:
                         break
+                    
                 else: #Mensaje por si nos da algo que no sea un numero
                     console.print("[red]No has introducido un numero. Introduce un número.[/red]")
                 input("Presiona enter")
                 system("cls")
-
 
 
         #Opcion 2 del menu principal
@@ -266,7 +265,6 @@ while texto_usuario !=6:
                         guardar_datos(clientes,articulos,ventas)
                        
 
-
                     elif opcion == 2:# Opcion para eliminar producto
                         id = input('Introduzca id del articulo a eliminar:\n')
                         if id in articulos:
@@ -277,7 +275,6 @@ while texto_usuario !=6:
                         else:
                             console.log("[bold yellow]Articulo no encontrado[/bold yellow]")
                         
-
                     elif opcion == 3: #Ver la lista de los productos
                        #Creamos la tabla de los producto
                         tabla = Table(title="Productos",  show_header=True, border_style='bold cyan')
@@ -298,7 +295,6 @@ while texto_usuario !=6:
                      
                         #Mostramos la tabla
                         console.print(tabla) 
-                        
 
                     elif opcion == 4: #Salir del bucle
                         break
@@ -314,7 +310,6 @@ while texto_usuario !=6:
 
         #Seccion de ventas
         elif texto_usuario == 3:
-
 
             while True:
                 
@@ -379,8 +374,6 @@ while texto_usuario !=6:
                         guardar_datos(clientes,articulos,ventas)
                         
 
-
-
                     elif opcion == 2:  # Eliminar venta
                         id_venta = int(input("Introduce el número de la venta a eliminar: "))
                         if id_venta in ventas:
@@ -395,7 +388,6 @@ while texto_usuario !=6:
 
                             del ventas[id_venta]
 
-                            
                             console.print("[bold red]Venta eliminada correctamente.[/bold red]")
                         else:
                             console.print("[bold yellow]Venta no encontrada.[/bold yellow]")
@@ -420,7 +412,7 @@ while texto_usuario !=6:
                                     str(datos["cantidad"]),
                                     f"{datos['total']}€"
                                 )
-
+                            #Mostamos la tabla
                             console.print(tabla)
                         
                     elif opcion == 4:  # Salir
@@ -430,10 +422,6 @@ while texto_usuario !=6:
                     console.print("[bold red]Introduce un número válido.[/bold red]")
                     input("Presiona Enter para continuar...")
                     system("cls")
-
-
-        
-
 
         #Seccion de facturacion
         elif texto_usuario == 4:

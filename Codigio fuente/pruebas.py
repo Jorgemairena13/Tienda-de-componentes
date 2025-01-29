@@ -138,22 +138,38 @@ clientes = {
 
 #Diccionario para ir añadiendo los articulos 
 articulos = {
-    "id_1": {"nombre": "Procesador", "precio": 100 , "Stock":50 },
-
-    "id_2": {"nombre": "Tarjeta gráfica", "precio": 200 , "Stock":40 },
-
-    "id_3": {"nombre": "Memoria RAM", "precio": 80 , "Stock":100 },
-
-    "id_4": {"nombre": "Disco Duro", "precio": 60 ,"Stock":200 },
-
-    "id_5": {"nombre": "SSD", "precio": 120 , "Stock":50 },
-
-    "id_6": {"nombre": "Placa Base", "precio": 150 , "Stock":100 },
-
-    "id_7": {"nombre": "Fuente de Alimentación", "precio": 70 , "Stock":100 },
-
-    "id_8": {"nombre": "Sistema de Refrigeración", "precio": 50 , "Stock":35 }
+    "Procesadores": {
+        "AMD Ryzen 5 5600X": {"precio": 299, "núcleos": 6, "frecuencia": "3.7 GHz", "stock": 50},
+        "Intel Core i7-11700K": {"precio": 399, "núcleos": 8, "frecuencia": "3.6 GHz", "stock": 30},
+        "AMD Ryzen 9 5950X": {"precio": 799, "núcleos": 16, "frecuencia": "3.4 GHz", "stock": 20}
+    },
+    "Tarjetas gráficas": {
+        "NVIDIA GeForce RTX 3070": {"precio": 599, "VRAM": "8 GB", "tipo_memoria": "GDDR6", "stock": 25},
+        "AMD Radeon RX 6800 XT": {"precio": 649, "VRAM": "16 GB", "tipo_memoria": "GDDR6", "stock": 15},
+        "NVIDIA GeForce RTX 3080": {"precio": 699, "VRAM": "10 GB", "tipo_memoria": "GDDR6X", "stock": 10}
+    },
+    "Memorias RAM": {
+        "Corsair Vengeance LPX 16GB": {"precio": 89, "capacidad": "16 GB", "velocidad": "3200 MHz", "stock": 100},
+        "G.Skill Ripjaws V 32GB": {"precio": 159, "capacidad": "32 GB", "velocidad": "3600 MHz", "stock": 75},
+        "Crucial Ballistix 64GB": {"precio": 329, "capacidad": "64 GB", "velocidad": "3200 MHz", "stock": 40}
+    },
+    "Almacenamiento": {
+        "Samsung 970 EVO Plus 1TB": {"precio": 179, "tipo": "SSD NVMe", "capacidad": "1 TB", "stock": 60},
+        "Western Digital Blue 2TB": {"precio": 59, "tipo": "HDD", "capacidad": "2 TB", "stock": 120},
+        "Crucial MX500 500GB": {"precio": 69, "tipo": "SSD SATA", "capacidad": "500 GB", "stock": 80}
+    },
+    "Placas base": {
+        "ASUS ROG Strix B550-F": {"precio": 189, "socket": "AM4", "formato": "ATX", "stock": 40},
+        "MSI MPG Z590 Gaming Edge": {"precio": 229, "socket": "LGA1200", "formato": "ATX", "stock": 35},
+        "Gigabyte X570 AORUS Elite": {"precio": 209, "socket": "AM4", "formato": "ATX", "stock": 30}
+    },
+    "Fuentes de alimentación": {
+        "Corsair RM750x": {"precio": 129, "potencia": "750W", "certificación": "80+ Gold", "stock": 50},
+        "EVGA SuperNOVA 850 G5": {"precio": 149, "potencia": "850W", "certificación": "80+ Gold", "stock": 40},
+        "Seasonic Focus GX-1000": {"precio": 199, "potencia": "1000W", "certificación": "80+ Gold", "stock": 25}
+    }
 }
+
 
 #Diccionario para ir añadiendo los articulos 
 ventas = {
@@ -217,9 +233,7 @@ while texto_usuario !=6:
                         else:
                             print("Cliente no encontrado")
                         
-                        
-
-
+                    #Mostar los clientes en una tabla
                     elif opcion == 4:
                         #Creamos la tabla
                         system('cls')
@@ -292,27 +306,26 @@ while texto_usuario !=6:
                         
 
                     elif opcion == 3: #Ver la lista de los productos
-                       #Creamos la tabla de los producto
-                        tabla = Table(title="Productos",  show_header=True, border_style='bold cyan')
+                        tabla = Table(title="Inventario de Componentes")
 
-                        #Añadimos columnas
-                        tabla.add_column("ID", style="bold cyan", justify="'right")
-                        tabla.add_column("Nombre producto", style="magenta", justify="center")
-                        tabla.add_column("Precio", style="magenta", justify="center")
-                        tabla.add_column("Stock", style="magenta", justify="center")
-                        
+                        # Añadir columnas a la tabla
+                        tabla.add_column("Categoría", style="cyan", justify="center")
+                        tabla.add_column("Producto", style="magenta", justify="center")
+                        tabla.add_column("Precio (€)", style="green", justify="center")
+                        tabla.add_column("Stock", style="yellow", justify="center")
 
+                        # Rellenar la tabla con datos del diccionario
+                        for categoria, productos in articulos.items():
+                            for producto, datos in productos.items():
+                                tabla.add_row(
+                                    categoria,
+                                    producto,
+                                    f"{datos['precio']}€",
+                                    str(datos.get("stock", "-"))  # Si no hay stock definido, muestra "-"
+                                )
 
-                        #Bucle para ver los datos de los clientes
-                        for id, datos in articulos.items():
-                            tabla.add_row(
-                            str(id),                          # ID del artículo
-                            datos['nombre'],         # Nombre del producto
-                            f"{datos['precio']}€",   # Precio con símbolo de euro
-                            f"{datos["Stock"]}")        #Stock del articulo
-                     
-                        #Mostramos la tabla
-                        console.print(tabla) 
+                        # Mostrar la tabla en la consola
+                        console.print(tabla)
                         
 
                     elif opcion == 4: #Salir del bucle
@@ -341,6 +354,7 @@ while texto_usuario !=6:
                     if opcion == 1:  # Registrar nueva venta
                         # Validar cliente
                         id_cliente = input("Introduce el ID del cliente: ")
+
                         if id_cliente not in clientes:
                             console.print("[bold red]Cliente no encontrado. Por favor, verifica el ID.[/bold red]")
                             continue
@@ -360,6 +374,7 @@ while texto_usuario !=6:
 
                         # Seleccionar producto
                         id_producto = input("Introduce el ID del producto a vender: ")
+                        
                         if id_producto not in articulos:
                             console.print("[bold red]Producto no encontrado. Por favor, verifica el ID.[/bold red]")
                             continue

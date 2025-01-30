@@ -8,7 +8,8 @@ from prompt_toolkit.styles import Style
 from os import system
 from rich.table import Table
 from rich.columns import Columns
-from rich.progress import Progress, BarColumn, TextColumn
+from rich.progress import Progress, BarColumn, TextColumn, SpinnerColumn
+from rich.live import Live
 import time
 
 console = Console()
@@ -206,11 +207,20 @@ articulos = {
 
 #Diccionario para ir añadiendo las ventas 
 ventas = {
+    1: {
+        "cliente": "Jorge ",
+        "categoria": "Procesadores",
+        "producto": "AMD Ryzen 5 5600X",
+        "cantidad": 1,
+        "precio_unitario": 299,
+        "total": 299
+    }
    
 }
 
 facturas = {
-
+     
+    
 }
 
 
@@ -219,9 +229,11 @@ texto_usuario = None
 
 #Cargar barra de principio
 progress = Progress(
-    TextColumn("[bold blue]Cargando tienda de componentes[/]"),
-    BarColumn(),
+    TextColumn("[bold blue]{task.description}"),
+    BarColumn(bar_width=None, complete_style="bright_blue", pulse_style="white"),
     TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
+    SpinnerColumn("dots"),
+    transient=True  # Desaparece al terminar
 )
 
 progress.start()  # Iniciar el progreso
@@ -260,7 +272,14 @@ while texto_usuario !=5:
                         console.log('Introduzca NIF: ', style='yellow')
                         nif = prompt('', style=style)
                         if nif in clientes:
-                            console.print('Cliente ya existente')
+                            console.print(
+                                Panel(
+                                    "[bold red]✗ Error: El cliente ya existe[/]",
+                                    title="Error", 
+                                    border_style="red",
+                                    subtitle=f"NIF duplicado: {nif}"
+                                ))
+                            prompt('Enter para continuar', style= style)
                             break
 
                         
@@ -274,7 +293,14 @@ while texto_usuario !=5:
                             "email": prompt("Email: ", style=style)
                         }
 
-                        console.print("Cliente añadido correctamente", style= 'green')
+                        console.print(
+                        Panel(
+                            "[bold green]✓ Cliente añadido correctamente[/]",
+                            title="Éxito", 
+                            border_style="green",
+                            subtitle=f"NIF: {nif}"
+    )
+)
 
 
                     elif opcion == 2:
@@ -300,14 +326,18 @@ while texto_usuario !=5:
                     elif opcion == 4:
                         #Creamos la tabla
                         system('cls')
-                        tabla = Table(title="Clientes", expand=True, show_header=True, border_style='bold cyan')
-
-                        #Añadimos columnas
-                        tabla.add_column("DNI", style="bold cyan", justify="'right")
-                        tabla.add_column("Nombre", style="magenta", justify="center")
-                        tabla.add_column("Telefono", style="magenta", justify="center")
-                        tabla.add_column("Dirrecion", style="magenta", justify="right")
-                        tabla.add_column("Email", style="magenta", justify="right")
+                        tabla = Table(
+                            title="[blink]📋 Lista de Clientes[/]",
+                            header_style="bold bright_cyan",
+                            row_styles=["dim", ""],
+                            border_style="bright_yellow",
+                            caption=f"Total clientes: {len(clientes)}"
+                        )
+                        tabla.add_column("DNI", style="italic cyan", justify="left", no_wrap=True)
+                        tabla.add_column("Nombre", style="#FF69B4", justify="center")
+                        tabla.add_column("Teléfono", style="bold green", justify="right")
+                        tabla.add_column("Dirrecion", style="bold green", justify="right")
+                        tabla.add_column("Email", style="bold green", justify="center")
 
 
                         #Bucle para ver los datos de los clientes
@@ -505,7 +535,10 @@ while texto_usuario !=5:
                         # Actualizar stock
                         articulos[categoria][producto]["stock"] -= cantidad
 
-                        console.print(f"[bold green]Venta registrada con éxito. Número de venta: {n_venta}[/bold green]")
+                        with Live(console=console, refresh_per_second=4) as live:
+                            for i in range(3):
+                                live.update(Panel("[green]✓ Venta registrada con éxito[/]", title="Notificación"))
+                                time.sleep(0.3)
                         n_venta += 1
 
                     elif opcion == 2:  # Eliminar venta
@@ -645,17 +678,23 @@ while texto_usuario !=5:
                         tabla.add_column("IVA", style="blue")
                         tabla.add_column("Total", style="red")
 
-                        for num_factura, factura in facturas.items():
-                            tabla.add_row(
-                                str(num_factura),
-                                factura['cliente'],
-                                factura['venta']['producto'],
-                                f"{factura['total']}€",
-                                f"{factura['iva']:.2f}€",
-                                f"{factura['total_con_iva']:.2f}€"
-                            )
-
-                        console.print(tabla)
+                        # En la sección de facturas (opción 4-2):
+                        for num, factura in facturas.items():
+                            grid = Table.grid(expand=True)
+                            grid.add_column(style="bold cyan")
+                            grid.add_column(style="magenta")
+                            
+                            # Formatear valores con estilo de moneda
+                            total = f"[bold green]€{factura['total']:,.2f}[/]"
+                            iva = f"[italic]€{factura['iva']:,.2f}[/]"
+                            total_con_iva = f"[bold yellow]€{factura['total_con_iva']:,.2f}[/]"
+                            
+                            grid.add_row("Cliente:", factura['cliente'])
+                            grid.add_row("Total:", total)
+                            grid.add_row("IVA (21%):", iva)
+                            grid.add_row("[bold]Total con IVA:", total_con_iva)
+                            
+                            console.print(Panel(grid, title=f"Factura #{num}"))
 
                     elif opcion == 3:  # Salir
                         system("cls")

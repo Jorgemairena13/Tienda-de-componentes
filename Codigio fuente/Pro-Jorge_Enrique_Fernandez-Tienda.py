@@ -29,16 +29,16 @@ titulo =  r"""[bright_blue]
 
 #Creamos el menu
 menu_contenido = """
-        [bold cyan]
-                                                1. 👥 Gestión de Clientes
+[bold cyan]
+                                1. 👥 Gestión de Clientes
 
                                                 2. 📦 Gestión de Productos
 
-                                                3. 💰 Gestión de Ventas
+                                3. 💰 Gestión de Ventas
 
                                                 4. 🧾 Facturación
 
-                                                5. 🚪 Salir
+                                5. 🚪 Salir
 [/bold cyan]
 [bold red]     
                                                 Elige una opcion:  
@@ -57,9 +57,12 @@ menu_opcion_1 = """
  [bold cyan]
         👤  [green]Opcion 1 - Añadir cliente[/green]
 
+
         🗑️  [red]Opcion 2 - Eliminar cliente[/red]
 
+
         🔍  [yellow]Opcion 3 - Ver datos cliente[/yellow]
+
 
         📋  Opcion 4 - Ver lista clientes 
         
@@ -75,13 +78,16 @@ menu_opcion_1 = """
 #Menu de la opcion 2
 menu_opcion_2 = """
 [bold cyan]
-Opción 1 - Añadir producto
+🛒  Opción 1 - Añadir producto
 
-Opción 2 - Eliminar producto
 
-Opción 3 - Lista de todos los productos
+🗑️  Opción 2 - Eliminar producto
 
-Opción 4 - Salir
+
+📋  Opción 3 - Lista de todos los productos
+
+
+🚪  Opción 4 - Salir
 [/bold cyan]
 
 [bold red]
@@ -162,7 +168,7 @@ style = Style.from_dict({
 
 #Diccionario para ir añadiendo los clientes con sus datos
 clientes = {  
-"20889620P": {  # NIF como clave principal (letra mayúscula)
+"20": {  # NIF como clave principal (letra mayúscula)
         "nombre": "Jorge",  
         "direccion": "Calle Falsa 123, Mairena , Granada",
         "telefono": "648721495",
@@ -247,6 +253,7 @@ for i in range(60):
 progress.stop()  # Detener el progreso
 prompt('Tienda cargada correctamente presiona enter...', style= style)
 system('cls')
+
 
 
 while texto_usuario !=5:
@@ -673,13 +680,14 @@ while texto_usuario !=5:
                             console.print("[bold red]Venta no encontrada[/bold red]")
                             continue
 
-                        # Generar número de factura simple
+                        # Generar número de factura 
                         num_factura = len(facturas) + 1
 
                         # Crear factura
                         facturas[num_factura] = {
                             'cliente': clientes[nif_cliente]['nombre'],
                             'nif': nif_cliente,
+                            "producto": ventas[id_venta]["producto"],
                             'venta': ventas[id_venta],
                             'total': ventas[id_venta]['total'],
                             'iva': ventas[id_venta]['total'] * 0.21,
@@ -732,6 +740,8 @@ while texto_usuario !=5:
                             grid.add_row("Cliente:", factura['cliente'])
                             grid.add_row("Total:", total)
                             grid.add_row("IVA (21%):", iva)
+                            grid.add_row("Producto:", ventas[id_venta]["producto"])
+                            grid.add_row("[bold]Total con IVA:", total_con_iva)
                             grid.add_row("[bold]Total con IVA:", total_con_iva)
                             
                             console.print(Panel(grid, title=f"Factura #{num}"))

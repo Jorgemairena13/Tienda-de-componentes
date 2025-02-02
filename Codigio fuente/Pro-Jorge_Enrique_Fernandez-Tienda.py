@@ -11,7 +11,7 @@ from rich.columns import Columns
 from rich.progress import Progress, BarColumn, TextColumn, SpinnerColumn
 from rich.live import Live
 import time
-
+system('cls')
 console = Console()
 
 
@@ -29,19 +29,19 @@ titulo =  r"""[bright_blue]
 
 #Creamos el menu
 menu_contenido = """
-[bold cyan]
-                                1. 👥 Gestión de Clientes
+        [bold cyan]
+                                                1. 👥 Gestión de Clientes
 
-                                2. 📦 Gestión de Productos
+                                                2. 📦 Gestión de Productos
 
-                                3. 💰 Gestión de Ventas
+                                                3. 💰 Gestión de Ventas
 
-                                4. 🧾 Facturación
+                                                4. 🧾 Facturación
 
-                                5. 🚪 Salir
+                                                5. 🚪 Salir
 [/bold cyan]
 [bold red]     
-                                Elige una opcion:  
+                                                Elige una opcion:  
 [/bold red]    
                             
 """
@@ -271,36 +271,76 @@ while texto_usuario !=5:
                         # Añadir cliente
                         console.log('Introduzca NIF: ', style='yellow')
                         nif = prompt('', style=style)
+
                         if nif in clientes:
                             console.print(
                                 Panel(
-                                    "[bold red]✗ Error: El cliente ya existe[/]",
+                                    "[yellow]✗ Error: El cliente ya existe[/]",
                                     title="Error", 
-                                    border_style="red",
+                                    border_style="yellow",
                                     subtitle=f"NIF duplicado: {nif}"
                                 ))
                             prompt('Enter para continuar', style= style)
                             break
 
-                        
-                        
+                        if len(nif) == 9 and nif[:8].isdigit() and nif[8].isalpha():
 
-                        nombre = prompt("Introduzca nombre: ",style=style)
-                        clientes[nif] = {
-                            "nombre": nombre,
-                            "direccion": prompt("Dirección: ", style=style),
-                            "telefono": prompt("Teléfono: ", style=style),
-                            "email": prompt("Email: ", style=style)
-                        }
+                            nombre = prompt("Introduzca nombre: ",style=style)
 
-                        console.print(
-                        Panel(
-                            "[bold green]✓ Cliente añadido correctamente[/]",
-                            title="Éxito", 
-                            border_style="green",
-                            subtitle=f"NIF: {nif}"
-    )
-)
+                            telefono = prompt("Introduzca su telefono: ",style=style)
+
+
+                            if telefono.isdigit and len(telefono) == 9:
+                                telefono = int(telefono)
+                            else:
+                                console.print(Panel(
+                                "[red] X Formato incorrecto Ejemplo 676123456[/] ",
+                                title="Incorrecto",
+                                border_style= 'red',
+                                
+                                ))
+                                continue
+
+                            email = prompt('Introduce tu email:', style=style)
+
+                            
+                            if "@" and "." in email:
+                                pass
+                            else:
+                                console.print(Panel(
+                                "[red] X Formato incorrecto Ejemplo Jorge@ejemplo.com",
+                                title="Incorrecto",
+                                border_style= 'red',
+                                
+                                ))
+                                continue
+
+
+                            direcion = prompt("Dirección: ", style=style)
+
+                            clientes[nif] = {
+                                "nombre": nombre,
+                                "direccion": direcion,
+                                "telefono": telefono,
+                                "email": email
+                            }
+
+                            console.print(
+                            Panel(
+                                "[bold green]✓ Cliente añadido correctamente[/]",
+                                title="Éxito", 
+                                border_style="green",
+                                subtitle=f"NIF: {nif}"))
+                        else:
+                            console.print(
+                                Panel(
+                                "[red] X Formato incorrecto Ejemplo 12345678A[/] ",
+                                title="Incorrecto",
+                                border_style= 'red',
+                                
+                                ))
+    
+
 
 
                     elif opcion == 2:

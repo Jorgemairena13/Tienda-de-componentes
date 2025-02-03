@@ -16,32 +16,36 @@ console = Console()
 
 
 #Creamos el titulo
-titulo =  r"""[bright_blue]
+titulo =  r"""[#979a9a]
 ██████╗ ██████╗ ███╗   ███╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗████████╗███████╗███████╗██████╗ ██████╗  ██████╗ 
 ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔═══██╗
 ██║     ██║   ██║██╔████╔██║██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║   ██║   █████╗  ███████╗██████╔╝██████╔╝██║   ██║
 ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ╚════██║██╔═══╝ ██╔══██╗██║   ██║
 ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚████║   ██║   ███████╗███████║██║     ██║  ██║╚██████╔╝
  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ 
-[/bright_blue]
+[/]
 """
 
 
 #Creamos el menu
 menu_contenido = """
 [bold cyan]
-                                1. 👥 Gestión de Clientes
+                                          [#45f808]  1. 👥 Gestión de Clientes [/]
 
-                                                2. 📦 Gestión de Productos
 
-                                3. 💰 Gestión de Ventas
+                                          [#f89208]  2. 📦 Gestión de Productos [/]
 
-                                                4. 🧾 Facturación
 
-                                5. 🚪 Salir
+                                          [#f8f408]  3. 💰 Gestión de Ventas [/]
+
+
+                                          [#00f9db]  4. 🧾 Facturación [/]
+
+
+                                          [magenta]  5. 🚪 Salir [/]
 [/bold cyan]
 [bold red]     
-                                                Elige una opcion:  
+                                            Elige una opcion:  
 [/bold red]    
                             
 """
@@ -55,79 +59,85 @@ menu_combinado = f"{titulo}\n\n{menu_contenido}"
 #Menu de la opcion 1
 menu_opcion_1 = """
  [bold cyan]
-        👤  [green]Opcion 1 - Añadir cliente[/green]
+👤  [green]Opcion 1 - Añadir cliente[/green]
 
 
-        🗑️  [red]Opcion 2 - Eliminar cliente[/red]
+🗑️  [red]Opcion 2 - Eliminar cliente[/red]
+
+🔍  [#f8f408]Opcion 3 - Ver datos cliente[/]
 
 
-        🔍  [yellow]Opcion 3 - Ver datos cliente[/yellow]
+📋  [#08f843]Opcion 4 - Ver lista clientes [/#08f843]
 
 
-        📋  Opcion 4 - Ver lista clientes 
-        
-
-        🚪  [magenta]Opcion 5 - Salir[/magenta]
-        [/bold cyan]
+🚪  [magenta]Opcion 5 - Salir[/magenta]
+[/bold cyan]
 [bold red]
-        Elige una opcion: 
+Elige una opcion: 
 [/bold red]    
 
 """
 
 #Menu de la opcion 2
 menu_opcion_2 = """
-[bold cyan]
-🛒  Opción 1 - Añadir producto
 
 
-🗑️  Opción 2 - Eliminar producto
+[green]🛒  Opción 1 - Añadir producto[/]
 
 
-📋  Opción 3 - Lista de todos los productos
+[red]🗑️  Opción 2 - Eliminar producto[/]
+
+[#f8f408]📋  Opción 3 - Lista de todos los productos[/]
 
 
-🚪  Opción 4 - Salir
-[/bold cyan]
+[magenta]🚪  Opción 4 - Salir[/]
 
-[bold red]
-Elige una opción:
-[/bold red]
+
+
+[bold red]Elige una opción:[/]
+
 
 """
 
 #Menu de la opcion 3
 menu_opcion_3 = """
-[bold cyan]
-        Opción 1 - Registrar nueva venta
 
-        Opción 2 - Eliminar venta
 
-        Opción 3 - Ver lista de ventas
-    
-        Opción 4 - Salir
-[/bold cyan]
+[green]💸  Opción 1 - Registrar nueva venta[/]
+
+
+[red]🗑️  Opción 2 - Eliminar venta[/]
+
+[#f8f408]📋  Opción 3 - Ver lista de ventas[/]
+
+[magenta]
+🚪  Opción 4 - Salir[/]
+
 [bold red]
-        Elige una opción: 
+Elige una opción: 
 [/bold red]    
 """
 
 #Menu de la opcion 4
 menu_opcion_4 = """
-[bold cyan]
-        Opción 1 - Crear factura
 
-        Opción 2 - Ver facturas
-        
-        Opción 3 - Salir
-[/bold cyan]
-[bold red]
-        Elige una opción: 
-[/bold red]    
+
+[green]🖨️  Opción 1 - Crear factura[/]
+
+[#f8f408]🏦  Opción 2 - Ver facturas[/]
+
+
+[magenta]🚪  Opción 3 - Salir[/]
+
+
+
+[bold red]Elige una opción:[/]
+    
 """
 
 
 #Aqui le aplicamos las propiedades al menu
+
 menu_principal = Panel(
     Align.center(menu_combinado),
     border_style="blue"
@@ -149,7 +159,7 @@ menu_panel2 = Panel(
 menu_panel3 = Panel(
     Align.center(menu_opcion_3),
     border_style="blue",
-    title="Gestion de productos"
+    title="Gestion de ventas"
     )
 #Propuedades del menu 4
 menu_panel4 = Panel(
@@ -236,9 +246,9 @@ texto_usuario = None
 #Cargar barra de principio
 progress = Progress(
     TextColumn("[bold blue]{task.description}"),
-    BarColumn(bar_width=None, complete_style="bright_blue", pulse_style="white"),
+    BarColumn(bar_width=100, complete_style="bright_cyan", pulse_style="red"),
     TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
-    SpinnerColumn("dots"),
+    SpinnerColumn("bouncingBall", style= "red", speed=2.0),
     transient=True  # Desaparece al terminar
 )
 
@@ -251,13 +261,15 @@ for i in range(60):
     progress.update(tarea, advance=2)
 
 progress.stop()  # Detener el progreso
-prompt('Tienda cargada correctamente presiona enter...', style= style)
+prompt('Poner pantalla completa para mejor visualizacion\nTienda cargada correctamente presiona enter...', style= style)
 system('cls')
 
 
 
 while texto_usuario !=5:
 #Sacamos por la terminal
+    
+    
     console.print(menu_principal)
 
     texto_usuario = prompt('', style=style)
@@ -390,11 +402,11 @@ while texto_usuario !=5:
                         #Bucle para ver los datos de los clientes
                         for nif, datos in clientes.items():
                              tabla.add_row(
-                        str(nif),                     # Convierte nif a string
-                        datos['nombre'],     # Accede al nombre del diccionario
-                        datos['telefono'],     # Accede al nombre del diccionario
-                        datos["direccion"] ,   # Acceder a la dirrecion
-                        datos["email"]      # Acceder al email
+                        str(nif),                     
+                        datos['nombre'],    
+                        datos['telefono'],     
+                        datos["direccion"] ,   
+                        datos["email"]      
 
                     )
                         #Mostramos la tabla
@@ -423,7 +435,7 @@ while texto_usuario !=5:
 
                     if opcion == 1:  # Añadir producto
                         # Mostrar categorías disponibles
-                        console.print("[bold cyan]Categorías disponibles:[/bold cyan]")
+                        console.print("[bold cyan]Categorías disponibles:[/]")
                         for categoria in articulos.keys():
                             console.print(f"- {categoria}")
                         
@@ -584,7 +596,7 @@ while texto_usuario !=5:
 
                         with Live(console=console, refresh_per_second=4) as live:
                             for i in range(3):
-                                live.update(Panel("[green]✓ Venta registrada con éxito[/]", title="Notificación"))
+                                live.update(Panel("[green]✓ Venta registrada con éxito[/]", title="Venta"))
                                 time.sleep(0.3)
                         n_venta += 1
 
@@ -604,7 +616,7 @@ while texto_usuario !=5:
                                 console.print("[bold yellow]Venta no encontrada.[/bold yellow]")
                                 continue
                         else:
-                            console.print('Incorrecto introduce un numero')
+                            console.print('[red]Incorrecto introduce un numero[/]')
 
                        
 
@@ -622,7 +634,7 @@ while texto_usuario !=5:
 
                             console.print(Columns(paneles))
                         else:
-                            console.print("[red]No hay ventas registradas.[/]")
+                            console.print("[#f9ec00 ]No hay ventas registradas.[/]")
 
                     elif opcion == 4:  # Salir
                         system("cls")
@@ -651,7 +663,7 @@ while texto_usuario !=5:
                         # Mostrar clientes disponibles
                         console.print("[bold cyan]Clientes disponibles:[/bold cyan]")
                         for nif, datos in clientes.items():
-                            console.print(f"NIF: {nif} - Nombre: {datos['nombre']}")
+                            console.print(f"[#68e5f6]NIF: {nif} - Nombre: {datos['nombre']}[]")
 
                         # Seleccionar cliente
                         nif_cliente = prompt("\nIntroduce el NIF del cliente: ")
@@ -672,10 +684,10 @@ while texto_usuario !=5:
                         # Mostrar ventas del cliente
                         console.print("\n[bold cyan]Ventas del cliente:[/bold cyan]")
                         for id_venta, venta in ventas_cliente:
-                            console.print(f"ID: {id_venta} - Producto: {venta['producto']} - Total: {venta['total']}€")
+                            console.print(f"[bold#72f900 ]ID: {id_venta} - Producto: {venta['producto']} - Total: {venta['total']}€[/]")
 
                         # Crear factura
-                        id_venta = int(prompt("\nIntroduce el ID de la venta a facturar: "))
+                        id_venta = int(prompt("\nIntroduce el ID de la venta a facturar: ", style=style))
                         if id_venta not in ventas:
                             console.print("[bold red]Venta no encontrada[/bold red]")
                             continue
@@ -753,7 +765,7 @@ while texto_usuario !=5:
                 else:
                     console.print("[red]Por favor, introduce un número válido[/red]")
 
-                prompt("\nPresiona Enter para continuar...")
+                prompt("\nPresiona Enter para continuar...",style=style)
                 system('cls')
     
             

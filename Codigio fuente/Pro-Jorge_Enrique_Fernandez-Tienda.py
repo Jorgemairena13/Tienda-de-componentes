@@ -17,35 +17,44 @@ console = Console()
 
 #Creamos el titulo
 titulo =  r"""[#979a9a]
-██████╗ ██████╗ ███╗   ███╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗████████╗███████╗███████╗██████╗ ██████╗  ██████╗ 
-██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝██╔════╝██╔══██╗██╔══██╗██╔═══██╗
-██║     ██║   ██║██╔████╔██║██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║   ██║   █████╗  ███████╗██████╔╝██████╔╝██║   ██║
-██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ╚════██║██╔═══╝ ██╔══██╗██║   ██║
-╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚████║   ██║   ███████╗███████║██║     ██║  ██║╚██████╔╝
- ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ 
-[/]
+ ██████╗ ██████╗ ███╗   ███╗██████╗  ██████╗ ███╗   ██╗███████╗███╗   ██╗████████╗███████╗███████╗
+██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔═══██╗████╗  ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝██╔════╝
+██║     ██║   ██║██╔████╔██║██████╔╝██║   ██║██╔██╗ ██║█████╗  ██╔██╗ ██║   ██║   █████╗  ███████╗
+██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║╚██╗██║██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ╚════██║
+╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ╚██████╔╝██║ ╚████║███████╗██║ ╚████║   ██║   ███████╗███████║
+ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚══════╝
+
+ 
+                                    ██████╗ ██████╗  ██████╗ 
+                                    ██╔══██╗██╔══██╗██╔═══██╗
+                                    ██████╔╝██████╔╝██║   ██║
+                                    ██╔═══╝ ██╔══██╗██║   ██║
+                                    ██║     ██║  ██║╚██████╔╝
+                                    ╚═╝     ╚═╝  ╚═╝ ╚═════╝
+
+
 """
 
 
 #Creamos el menu
 menu_contenido = """
 [bold cyan]
-                                          [#45f808]  1. 👥 Gestión de Clientes [/]
+                                    [#45f808]  1. 👥 Gestión de Clientes [/]
 
 
-                                          [#f89208]  2. 📦 Gestión de Productos [/]
+                                    [#f89208]  2. 📦 Gestión de Productos [/]
 
 
-                                          [#f8f408]  3. 💰 Gestión de Ventas [/]
+                                    [#f8f408]  3. 💰 Gestión de Ventas [/]
 
 
-                                          [#00f9db]  4. 🧾 Facturación [/]
+                                    [#00f9db]  4. 🧾 Facturación [/]
 
 
-                                          [magenta]  5. 🚪 Salir [/]
+                                    [magenta]  5. 🚪 Salir [/]
 [/bold cyan]
 [bold red]     
-                                            Elige una opcion:  
+                                    Elige una opcion:  
 [/bold red]    
                             
 """
@@ -64,10 +73,10 @@ menu_opcion_1 = """
 
 🗑️  [red]Opcion 2 - Eliminar cliente[/red]
 
-🔍  [#f8f408]Opcion 3 - Ver datos cliente[/]
+🔍  [#2BD0F9]Opcion 3 - Ver datos cliente[/]
 
 
-📋  [#08f843]Opcion 4 - Ver lista clientes [/#08f843]
+📋  [#f8f408]Opcion 4 - Ver lista clientes [/]
 
 
 🚪  [magenta]Opcion 5 - Salir[/magenta]
@@ -140,31 +149,31 @@ menu_opcion_4 = """
 
 menu_principal = Panel(
     Align.center(menu_combinado),
-    border_style="blue"
+    border_style="#6fefce"
 )
 
 #Propiedades para el menu de la opcion 1
 menu_panel1 = Panel(
     Align.center(menu_opcion_1),
-    border_style="blue",
+    border_style="#6fefce",
     title="Gestion de clientes"
     )
 #Propiedades para el menu de la opcion 2
 menu_panel2 = Panel(
     Align.center(menu_opcion_2),
-    border_style="blue",
+    border_style="#6fefce",
     title="Gestion de productos"
     )
 #Propiedades para el menu de la opcion 3
 menu_panel3 = Panel(
     Align.center(menu_opcion_3),
-    border_style="blue",
+    border_style="#6fefce",
     title="Gestion de ventas"
     )
 #Propuedades del menu 4
 menu_panel4 = Panel(
     Align.center(menu_opcion_4),
-    border_style="blue",
+    border_style="#6fefce",
     title="Gestión de Facturación"
 )
 
@@ -178,7 +187,7 @@ style = Style.from_dict({
 
 #Diccionario para ir añadiendo los clientes con sus datos
 clientes = {  
-"20": {  # NIF como clave principal (letra mayúscula)
+"20": {  # NIF como clave principal 
         "nombre": "Jorge",  
         "direccion": "Calle Falsa 123, Mairena , Granada",
         "telefono": 648721495,
@@ -189,34 +198,34 @@ clientes = {
 #Diccionario para ir añadiendo los articulos 
 articulos = {
     "Procesadores": {
-        "AMD Ryzen 5 5600X": {"precio": 299, "núcleos": 6, "frecuencia": "3.7 GHz", "stock": 50},
-        "Intel Core i7-11700K": {"precio": 399, "núcleos": 8, "frecuencia": "3.6 GHz", "stock": 30},
-        "AMD Ryzen 9 5950X": {"precio": 799, "núcleos": 16, "frecuencia": "3.4 GHz", "stock": 20}
+        "AMD Ryzen 5": {"precio": 299, "núcleos": 6,  "stock": 50},
+        "Intel Core i7": {"precio": 399, "núcleos": 8,  "stock": 30},
+        "AMD Ryzen 9": {"precio": 799, "núcleos": 16,  "stock": 20}
     },
-    "Tarjetas gráficas": {
-        "NVIDIA GeForce RTX 3070": {"precio": 599, "VRAM": "8 GB", "tipo_memoria": "GDDR6", "stock": 25},
-        "AMD Radeon RX 6800 XT": {"precio": 649, "VRAM": "16 GB", "tipo_memoria": "GDDR6", "stock": 15},
-        "NVIDIA GeForce RTX 3080": {"precio": 699, "VRAM": "10 GB", "tipo_memoria": "GDDR6X", "stock": 10}
+    "Tarjetas graficas": {
+        "NVIDIA GeForce RTX 3070": {"precio": 599, "VRAM": "8 GB",  "stock": 25},
+        "AMD Radeon RX 6800 XT": {"precio": 649, "VRAM": "16 GB", "stock": 15},
+        "NVIDIA GeForce RTX 3080": {"precio": 699, "VRAM": "10 GB","stock": 10}
     },
-    "Memorias RAM": {
-        "Corsair Vengeance LPX 16GB": {"precio": 89, "capacidad": "16 GB", "velocidad": "3200 MHz", "stock": 100},
-        "G.Skill Ripjaws V 32GB": {"precio": 159, "capacidad": "32 GB", "velocidad": "3600 MHz", "stock": 75},
-        "Crucial Ballistix 64GB": {"precio": 329, "capacidad": "64 GB", "velocidad": "3200 MHz", "stock": 40}
+    "Memoria ram": {
+        "Corsair": {"precio": 89, "capacidad": "16 GB",  "stock": 100},
+        "G.Skill": {"precio": 159, "capacidad": "32 GB",  "stock": 75},
+        "Crucial": {"precio": 329, "capacidad": "64 GB",  "stock": 40}
     },
     "Almacenamiento": {
-        "Samsung 970 EVO Plus 1TB": {"precio": 179, "tipo": "SSD NVMe", "capacidad": "1 TB", "stock": 60},
-        "Western Digital Blue 2TB": {"precio": 59, "tipo": "HDD", "capacidad": "2 TB", "stock": 120},
-        "Crucial MX500 500GB": {"precio": 69, "tipo": "SSD SATA", "capacidad": "500 GB", "stock": 80}
+        "Samsung": {"precio": 179, "tipo": "SSD NVMe", "capacidad": "1 TB", "stock": 60},
+        "Western": {"precio": 59, "tipo": "HDD", "capacidad": "2 TB", "stock": 120},
+        "Crucial": {"precio": 69, "tipo": "SSD SATA", "capacidad": "500 GB", "stock": 80}
     },
     "Placas base": {
-        "ASUS ROG Strix B550-F": {"precio": 189, "socket": "AM4", "formato": "ATX", "stock": 40},
-        "MSI MPG Z590 Gaming Edge": {"precio": 229, "socket": "LGA1200", "formato": "ATX", "stock": 35},
-        "Gigabyte X570 AORUS Elite": {"precio": 209, "socket": "AM4", "formato": "ATX", "stock": 30}
+        "ASUS": {"precio": 189, "socket": "AM4",  "stock": 40},
+        "MSI": {"precio": 229, "socket": "LGA1200",  "stock": 35},
+        "Gigabyte": {"precio": 209, "socket": "AM4",  "stock": 30}
     },
     "Fuentes de alimentación": {
-        "Corsair RM750x": {"precio": 129, "potencia": "750W", "certificación": "80+ Gold", "stock": 50},
-        "EVGA SuperNOVA 850 G5": {"precio": 149, "potencia": "850W", "certificación": "80+ Gold", "stock": 40},
-        "Seasonic Focus GX-1000": {"precio": 199, "potencia": "1000W", "certificación": "80+ Gold", "stock": 25}
+        "Corsair": {"precio": 129, "potencia": "750W","stock": 50},
+        "EVGA ": {"precio": 149, "potencia": "850W", "stock": 40},
+        "Seasonic": {"precio": 199, "potencia": "1000W","stock": 25}
     }
 }
 
@@ -226,7 +235,7 @@ ventas = {
     1: {
         "cliente": "Jorge ",
         "categoria": "Procesadores",
-        "producto": "AMD Ryzen 5 5600X",
+        "producto": "AMD Ryzen 5",
         "cantidad": 1,
         "precio_unitario": 299,
         "total": 299
@@ -267,21 +276,25 @@ system('cls')
 
 
 while texto_usuario !=5:
-#Sacamos por la terminal
-    
-    
-    console.print(menu_principal)
 
+    
+    #Mostramos el menu principal
+    console.print(menu_principal)
+    #Le pedimos al usario que opcion quiere
     texto_usuario = prompt('', style=style)
     system("cls")
 
+    #Comprobamos que se un numero
     if texto_usuario.isdigit():
-        texto_usuario = int(texto_usuario)
+        texto_usuario = int(texto_usuario)#Le cambiamos el tipo
+        #Opcion 1
         if texto_usuario == 1:
+            #Bucle de la opcion 1
             while True:
-
+                #Le mostramos el menu
                 console.print(menu_panel1)
-                opcion = prompt('', style=style)
+
+                opcion = prompt('', style=style)#le pedimos que nos de una opcion
                 #Comprobamos que es un numero
                 if opcion.isdigit(): 
                     opcion = int(opcion) #Convertimos a digito 
@@ -291,36 +304,66 @@ while texto_usuario !=5:
                         console.log('Introduzca NIF: ', style='yellow')
                         nif = prompt('', style=style).strip()
 
-                        if nif == "":
-                            console.print("Dni vacio ")
+                        if nif == "": #Comprobamos que el dni no este vacio
                             system("cls")
-                            continue
+                            console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                            continue 
+                            
                         
-
+                        #Comprobamos que el cliente no este registrado
                         if nif in clientes :
                             console.print(
                                 Panel(
-                                    "[yellow]✗ Error: El cliente ya existe[/]",
+                                    "[yellow]❌ Error: El cliente ya existe[/]",
                                     title="Error", 
                                     border_style="yellow",
-                                    subtitle=f"NIF duplicado: {nif}"
-                                ))
+                                    subtitle=f"NIF duplicado: {nif}",
+                                    width=30
+                                ),justify="center")
                             prompt('Enter para continuar', style= style)
                             break
 
                         if len(nif) == 9 and nif[:8].isdigit() and nif[8].isalpha():
 
-                            nombre = prompt("Introduzca nombre: ",style=style)
+                            nombre = prompt("Introduzca nombre: ",style=style).strip()
 
-                            telefono = prompt("Introduzca su telefono: ",style=style)
+                            if nombre == "":
+                                system("cls")
+                                console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                                continue 
+
+                            telefono = prompt("Introduzca su telefono: ",style=style).strip()
+
+                            if telefono == "":
+                                system("cls")
+                                console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                                continue 
 
 
-                            if telefono.isdigit and len(telefono) == 9:
+                            if telefono.isdigit() and len(telefono) == 9:
                                 telefono = int(telefono)
                             else:
                                 system("cls")
                                 console.print(Panel(
-                                "[red] X Formato incorrecto Ejemplo 676123456[/] ",
+                                "[red] ❌ Formato incorrecto Ejemplo 676123456[/] ",
                                 title="Incorrecto",
                                 border_style= 'red',
                                 ))
@@ -328,13 +371,23 @@ while texto_usuario !=5:
 
                             email = prompt('Introduce tu email:', style=style)
 
+                            if email == "":
+                                system("cls")
+                                console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                                continue 
                             
                             if "@" and "." in email:
                                 pass
                             else:
                                 system("cls")
                                 console.print(Panel(
-                                "[red] X Formato incorrecto Ejemplo Jorge@ejemplo.com",
+                                "[red] ❌ Formato incorrecto Ejemplo Jorge@ejemplo.com",
                                 title="Incorrecto",
                                 border_style= 'red',
                                 
@@ -342,7 +395,17 @@ while texto_usuario !=5:
                                 continue
 
 
-                            direcion = prompt("Dirección: ", style=style)
+                            direcion = prompt("Dirección: ", style=style).strip()
+                            if direcion == "":
+                                system("cls")
+                                console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                                continue 
 
                             clientes[nif] = {
                                 "nombre": nombre,
@@ -353,41 +416,82 @@ while texto_usuario !=5:
                             system("cls")
                             console.print(
                             Panel(
-                                "[bold green]✓ Cliente añadido correctamente[/]",
-                                title="Éxito", 
+                                "[bold green]✅ Cliente añadido correctamente[/]", 
                                 border_style="green",
-                                subtitle=f"NIF: {nif}"))
+                                width=40,
+                                subtitle=f"NIF: {nif}"),justify="center")
                         else:
                             system("cls")
                             console.print(
                                 Panel(
-                                "[red] X Formato incorrecto Ejemplo 12345678A[/] ",
+                                "[red] ❌ Formato incorrecto Ejemplo 12345678A[/] ",
                                 title="Incorrecto",
                                 border_style= 'red',
-                                
-                                ))
+                                width=30,
+                                ),justify="center")
     
 
 
 
                     elif opcion == 2:
                         # Eliminar cliente
-                        nif = prompt('Introduzca NIF del cliente a eliminar:\n',  style=style)
+                        nif = prompt('Introduzca NIF del cliente a eliminar:\n',  style=style).strip()
+
+                        #Verificar que no este vacio
+                        if nif == "":
+                            system("cls")
+                            console.print(Panel(
+                                "[red] ❌ No has introducido nada[/] ",
+                                title="Dato vacio",
+                                border_style= 'red',
+                                width=30,
+                            
+                                ),justify="center")
+                            continue 
+
+                        #Verificar que este en clientes
                         if nif in clientes:
-                            console.log("[bold red]Cliente eliminado[/bold red]")
-                            console.log(clientes[nif], style="Red")
+                            
+                            console.print(
+                                Panel(
+                                f"[bold red]❌ Cliente eliminado correctamente\n{clientes[nif]["nombre"]}[/]",
+                                border_style="red",
+                                width=40,
+                                subtitle=f"NIF: {nif}"),justify="center")
                             del clientes[nif]
                         else:
-                            console.log("[bold yellow]Cliente no encontrado[/bold yellow]")
+                            console.log(Panel("[bold yellow]Cliente no encontrado[/bold yellow]",
+                                border_style="bold yellow",
+                                width=40))
                         
 
                     elif opcion == 3:
                         # Mostrar cliente concreto que quiera 
                         nif = prompt("Introduzca NIF del cliente: ", style=style) 
                         if nif in clientes:
-                            console.print(clientes[nif], style='blue')
+                            tabla_cliente = Table(title=f"Datos del Cliente: {nif}")
+
+                            # Definir las columnas
+                            tabla_cliente.add_column("Cliente", style="cyan", no_wrap=True)
+                            tabla_cliente.add_column("Datos cliente", style="magenta")
+
+                            # Agregar las filas con la información del cliente
+                            tabla_cliente.add_row("NIF", nif)
+                            tabla_cliente.add_row("Nombre", clientes[nif]["nombre"])
+                            tabla_cliente.add_row("Dirección", clientes[nif]["direccion"])
+                            tabla_cliente.add_row("Teléfono", str(clientes[nif]["telefono"]))
+                            tabla_cliente.add_row("Email", clientes[nif]["email"])
+
+                        # Mostrar la tabla en consola
+                            console.print(tabla_cliente)
+                    
                         else:
-                            console.print("Cliente no encontrado",style=' bold yellow')
+                            console.print(Panel(
+                                    "[yellow]❌ Error: El cliente no existe[/]",
+                                    title="Error de busqueda", 
+                                    border_style="yellow",
+                                    width=30
+                                ),justify="center")
                         
                     #Mostar los clientes en una tabla
                     elif opcion == 4:
@@ -396,7 +500,6 @@ while texto_usuario !=5:
                         tabla = Table(
                             title="[blink]📋 Lista de Clientes[/]",
                             header_style="bold bright_cyan",
-                            row_styles=["dim", ""],
                             border_style="bright_yellow",
                             caption=f"Total clientes: {len(clientes)}"
                         )
@@ -420,13 +523,11 @@ while texto_usuario !=5:
                         #Mostramos la tabla
                         console.print(tabla)
                         
-                            
-
                     elif opcion == 5:
                         system("cls")
                         break
                 else: #Mensaje por si nos da algo que no sea un numero
-                    console.print("[red]No has introducido un numero. Introduce un número.[/red]")
+                    console.print("[red]❌ No has introducido un numero. Introduce un número.[/red]")
                 prompt("Presiona enter", style=style)
                 system("cls")
 
@@ -443,28 +544,70 @@ while texto_usuario !=5:
 
                     if opcion == 1:  # Añadir producto
                         # Mostrar categorías disponibles
-                        console.print("[bold cyan]Categorías disponibles:[/]")
+                        console.print("[bold cyan]📝 Categorías disponibles:[/]")
                         for categoria in articulos.keys():
-                            console.print(f"- {categoria}")
+                            console.print(f"[#ab94de]- {categoria}[/]")
                         
-                        categoria = prompt("Introduce la categoría del producto: ", style=style)
+                        categoria = prompt("Introduce la categoría del producto: ", style=style).strip()
+
+                        if categoria == "":
+                            console.print(Panel(
+                                          "❌No se aceptan espacios vacios",
+                                          title="Error",
+                                          border_style="red"
+                                          ))
+                        else:
+                            system("cls")
+                            console.print(Panel(
+                                          "[red]❌Formato no valido[/]",
+                                          title="Error",
+                                          border_style="red"
+                                          ))
+                            continue
+
+
                         if categoria not in articulos:
                             articulos[categoria] = {}
-                        
+                        #Le pedimos el nombre del producto
                         nombre_producto = prompt("Nombre del producto: ", style=style)
-                        precio = int(prompt("Precio: ", style=style))
-                        stock = int(prompt("Stock: ", style=style))
-                        
+
+                        #Le pedimos el precio del procucto
+                        precio = prompt("Precio: ", style=style)
+                        #Comprobar que  es un numero
+                        if precio.isdigit() or precio != '':
+                            precio = int(precio)
+                        else:
+                            system("cls")
+                            console.print(Panel(
+                                          "[red]❌Formato no valido[/]",
+                                          title="Error",
+                                          border_style="red"
+                                          ))
+                            continue
+
+                        #El stock del producto que vamos a incorporar
+                        stock = prompt("Stock: ", style=style)
+                        #Comprobar que es un numero
+                        if stock.isdigit():
+                            stock = int(stock)
+                        else:
+                            system("cls")
+                            console.print(Panel(
+                                          "[red]❌Formato no valido[/]",
+                                          title="Error",
+                                          border_style="red"
+                                          ))
+                            continue
                         # Añadir producto a la categoría
                         articulos[categoria][nombre_producto] = {
                             "precio": precio,
                             "stock": stock
                         }
-                        console.print("[bold green]Producto añadido correctamente[/bold green]")
+                        console.print("[bold green]✅ Producto añadido correctamente[/bold green]")
 
                     elif opcion == 2:  # Eliminar producto
                         # Mostrar categorías
-                        console.print("[bold cyan]Categorías disponibles:[/bold cyan]")
+                        console.print("[bold cyan]📝Categorías disponibles:[/bold cyan]")
                         for categoria in articulos.keys():
                             console.print(f"- {categoria}")
                         
@@ -480,16 +623,21 @@ while texto_usuario !=5:
 
                             if producto in articulos[categoria]: #Comprobamos que la categoria este
                                 del articulos[categoria][producto] #Eliminamos el producto
-                                console.print("[bold green]Producto eliminado correctamente[/bold green]")
+                                console.print("[bold green]✅Producto eliminado correctamente[/bold green]")
                             else:
-                                console.print("[bold red]Producto no encontrado[/bold red]")
+                                console.print("[bold red]🔍❓Producto no encontrado[/bold red]")
                         else:
-                            console.print("[bold red]Categoría no encontrada[/bold red]")
+                            console.print("[bold red]🔍❓Categoría no encontrada[/bold red]")
 
 
                     elif opcion == 3:  # Ver lista de productos
 
-                        tabla = Table(title="Inventario de Componentes")#Creamos la tabla
+                        tabla = Table(title="[blink]📋 Lista de Componentes[/]",#Creamos la tabla
+                            header_style="bold bright_cyan",
+                            border_style="bright_yellow",
+                            caption=f"Total articulos: {len(articulos)}")
+
+
                         #Le añadimso las columanas a la tabla
                         tabla.add_column("Categoría", style="cyan", justify="center")
                         tabla.add_column("Producto", style="magenta", justify="center")
@@ -546,12 +694,12 @@ while texto_usuario !=5:
 
                         if id_cliente not in clientes:
                             system("cls")
-                            console.print("[bold red]Cliente no encontrado. Por favor, verifica el ID.[/bold red]")
+                            console.print("[bold red]🔍❓Cliente no encontrado. Por favor, verifica el ID.[/bold red]")
                             continue
 
                         # Mostrar lista de productos disponibles
-                        console.print("[bold cyan]Categorías disponibles:[/bold cyan]")
-                        tabla = Table(title="Productos Disponibles", show_header=True, border_style='bold cyan')
+                        console.print("[bold cyan]📝Categorías disponibles:[/bold cyan]")
+                        tabla = Table(title="[[blink]]Productos Disponibles[/]", show_header=True, border_style='bold cyan')
                         tabla.add_column("Categoría", style="cyan")
                         tabla.add_column("Producto", style="magenta")
                         tabla.add_column("Precio", style="green")
@@ -575,25 +723,25 @@ while texto_usuario !=5:
 
                         if categoria not in articulos: #Comprueba que la categora no exista
                             system("cls")
-                            console.print("[bold red]Categoría no encontrada[/bold red]")
+                            console.print("[bold red]🔍❓Categoría no encontrada[/bold red]")
                             continue
                             
                         producto = prompt("Introduce el nombre del producto: ", style=style)  #LE pedimos el nombre del producto
                         if producto not in articulos[categoria]:
                             system("cls")
-                            console.print("[bold red]Producto no encontrado[/bold red]")
+                            console.print("[bold red]❌Producto no encontrado[/bold red]")
                             continue
 
                         # Verificar stock
                         if articulos[categoria][producto]['stock'] <= 0:
                             system("cls")
-                            console.print("[bold yellow]No hay stock disponible para este producto[/bold yellow]")
+                            console.print("[bold yellow]📦❌No hay stock disponible para este producto[/bold yellow]")
                             continue
 
                         cantidad = int(prompt("Introduce la cantidad a vender: ", style=style))
                         if cantidad > articulos[categoria][producto]['stock']:
                             system("cls")
-                            console.print(f"[bold yellow]Stock insuficiente. Solo hay disponible: {articulos[categoria][producto]['stock']}[/bold yellow]")
+                            console.print(f"[bold yellow]📦❌Stock insuficiente. Solo hay disponible: {articulos[categoria][producto]['stock']}[/bold yellow]")
                             continue
 
                         # Registrar venta
@@ -611,7 +759,7 @@ while texto_usuario !=5:
 
                         with Live(console=console, refresh_per_second=4) as live:
                             for i in range(3):
-                                live.update(Panel("[green]✓ Venta registrada con éxito[/]", title="Venta"))
+                                live.update(Panel("[green]✅ Venta registrada con éxito[/]", title="Venta",width=30))
                                 time.sleep(0.3)
                         n_venta += 1
 
@@ -626,12 +774,12 @@ while texto_usuario !=5:
                             
                                 articulos[venta["categoria"]][venta["producto"]]["stock"] += venta["cantidad"]
                                 del ventas[id_venta]
-                                console.print("[bold red]Venta eliminada correctamente.[/bold red]")
+                                console.print("[bold red]✅Venta eliminada correctamente.[/bold red]")
                             else:
-                                console.print("[bold yellow]Venta no encontrada.[/bold yellow]")
+                                console.print("[bold yellow]🔍❓Venta no encontrada.[/bold yellow]")
                                 continue
                         else:
-                            console.print('[red]Incorrecto introduce un numero[/]')
+                            console.print('[red]❌Incorrecto introduce un numero[/]')
 
                        
 
@@ -649,19 +797,16 @@ while texto_usuario !=5:
 
                             console.print(Columns(paneles))
                         else:
-                            console.print("[#f9ec00 ]No hay ventas registradas.[/]")
+                            console.print("[#f9ec00 ]🤷No hay ventas registradas.[/]")
 
                     elif opcion == 4:  # Salir
                         system("cls")
                         break
 
                 else:
-                    console.print("[bold red]Introduce un número válido.[/bold red]")
+                    console.print("[bold red]❌Introduce un número válido.[/bold red]")
                 prompt("Presiona Enter para continuar...", style=style)
                 system("cls")
-
-
-        
 
 
         #Seccion de facturacion
@@ -676,14 +821,14 @@ while texto_usuario !=5:
 
                     if opcion == 1:  # Crear factura
                         # Mostrar clientes disponibles
-                        console.print("[bold cyan]Clientes disponibles:[/bold cyan]")
+                        console.print("[bold cyan]👥Clientes disponibles:[/bold cyan]")
                         for nif, datos in clientes.items():
                             console.print(f"[#68e5f6]NIF: {nif} - Nombre: {datos['nombre']}[]")
 
                         # Seleccionar cliente
                         nif_cliente = prompt("\nIntroduce el NIF del cliente: ")
                         if nif_cliente not in clientes:
-                            console.print("[bold red]Cliente no encontrado[/bold red]")
+                            console.print("[bold red]🔍❓Cliente no encontrado[/bold red]")
                             continue
 
                         # Mostrar ventas del cliente
@@ -693,7 +838,7 @@ while texto_usuario !=5:
                                 ventas_cliente.append((id_venta, venta))
 
                         if not ventas_cliente:
-                            console.print("[bold yellow]No hay ventas para este cliente[/bold yellow]")
+                            console.print("[bold yellow]🔍❓No hay ventas para este cliente[/bold yellow]")
                             continue
 
                         # Mostrar ventas del cliente
@@ -704,7 +849,7 @@ while texto_usuario !=5:
                         # Crear factura
                         id_venta = int(prompt("\nIntroduce el ID de la venta a facturar: ", style=style))
                         if id_venta not in ventas:
-                            console.print("[bold red]Venta no encontrada[/bold red]")
+                            console.print("[bold red]🔍❓Venta no encontrada[/bold red]")
                             continue
 
                         # Generar número de factura 
@@ -736,24 +881,11 @@ while texto_usuario !=5:
 
                         progress.stop()  # Detener el progreso
                         
-                        console.print(f"[bold green]Factura {num_factura} creada correctamente[/bold green]")
+                        console.print(f"[bold green]🧾Factura {num_factura} creada correctamente[/bold green]")
                         
 
                     elif opcion == 2:  # Ver facturas
-                        if not facturas:
-                            console.print("[bold yellow]No hay facturas registradas[/bold yellow]")
-                            continue
-
-                        # Crear tabla de facturas
-                        tabla = Table(title="Facturas")
-                        tabla.add_column("Nº Factura", style="cyan")
-                        tabla.add_column("Cliente", style="magenta")
-                        tabla.add_column("Producto", style="yellow")
-                        tabla.add_column("Subtotal", style="green")
-                        tabla.add_column("IVA", style="blue")
-                        tabla.add_column("Total", style="red")
-
-                        # En la sección de facturas (opción 4-2):
+                        # En la sección de visualización de facturas:
                         for num, factura in facturas.items():
                             grid = Table.grid(expand=True)
                             grid.add_column(style="bold cyan")
@@ -764,22 +896,17 @@ while texto_usuario !=5:
                             iva = f"[italic]€{factura['iva']:,.2f}[/]"
                             total_con_iva = f"[bold yellow]€{factura['total_con_iva']:,.2f}[/]"
                             
+                            producto = factura['venta']['producto']  # Extraemos el producto desde la factura
+                            
                             grid.add_row("Cliente:", factura['cliente'])
+                            grid.add_row("Producto:", producto)
                             grid.add_row("Total:", total)
                             grid.add_row("IVA (21%):", iva)
-                            grid.add_row("Producto:", ventas[id_venta]["producto"])
-                            grid.add_row("[bold]Total con IVA:", total_con_iva)
                             grid.add_row("[bold]Total con IVA:", total_con_iva)
                             
-                            console.print(Panel(grid, title=f"Factura #{num}"))
-
-                    elif opcion == 3:  # Salir
-                        system("cls")
+                            console.print(Panel(grid, title=f"🧾Factura #{num}"))
+                    elif opcion == 3:
                         break
-
-                else:
-                    console.print("[red]Por favor, introduce un número válido[/red]")
-
                 prompt("\nPresiona Enter para continuar...",style=style)
                 system('cls')
     

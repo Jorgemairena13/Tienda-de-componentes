@@ -181,7 +181,7 @@ clientes = {
 "20": {  # NIF como clave principal (letra mayúscula)
         "nombre": "Jorge",  
         "direccion": "Calle Falsa 123, Mairena , Granada",
-        "telefono": "648721495",
+        "telefono": 648721495,
         "email": "jorge@ejemplo.com" 
 }
 }
@@ -289,9 +289,15 @@ while texto_usuario !=5:
                     if opcion == 1:
                         # Añadir cliente
                         console.log('Introduzca NIF: ', style='yellow')
-                        nif = prompt('', style=style)
+                        nif = prompt('', style=style).strip()
 
-                        if nif in clientes:
+                        if nif == "":
+                            console.print("Dni vacio ")
+                            system("cls")
+                            continue
+                        
+
+                        if nif in clientes :
                             console.print(
                                 Panel(
                                     "[yellow]✗ Error: El cliente ya existe[/]",
@@ -312,11 +318,11 @@ while texto_usuario !=5:
                             if telefono.isdigit and len(telefono) == 9:
                                 telefono = int(telefono)
                             else:
+                                system("cls")
                                 console.print(Panel(
                                 "[red] X Formato incorrecto Ejemplo 676123456[/] ",
                                 title="Incorrecto",
                                 border_style= 'red',
-                                
                                 ))
                                 continue
 
@@ -326,6 +332,7 @@ while texto_usuario !=5:
                             if "@" and "." in email:
                                 pass
                             else:
+                                system("cls")
                                 console.print(Panel(
                                 "[red] X Formato incorrecto Ejemplo Jorge@ejemplo.com",
                                 title="Incorrecto",
@@ -343,7 +350,7 @@ while texto_usuario !=5:
                                 "telefono": telefono,
                                 "email": email
                             }
-
+                            system("cls")
                             console.print(
                             Panel(
                                 "[bold green]✓ Cliente añadido correctamente[/]",
@@ -351,6 +358,7 @@ while texto_usuario !=5:
                                 border_style="green",
                                 subtitle=f"NIF: {nif}"))
                         else:
+                            system("cls")
                             console.print(
                                 Panel(
                                 "[red] X Formato incorrecto Ejemplo 12345678A[/] ",
@@ -404,7 +412,7 @@ while texto_usuario !=5:
                              tabla.add_row(
                         str(nif),                     
                         datos['nombre'],    
-                        datos['telefono'],     
+                        str(datos['telefono']),     
                         datos["direccion"] ,   
                         datos["email"]      
 
@@ -521,9 +529,11 @@ while texto_usuario !=5:
 
         #Seccion de ventas
         elif texto_usuario == 3:
+            
             n_venta = 1  # Contador para las ventas
 
             while True:
+                
                 console.print(menu_panel3)  # Mostrar el menú de ventas
                 opcion = prompt("", style=style)
 
@@ -535,6 +545,7 @@ while texto_usuario !=5:
                         id_cliente = prompt("Introduce el ID del cliente: ", style=style)
 
                         if id_cliente not in clientes:
+                            system("cls")
                             console.print("[bold red]Cliente no encontrado. Por favor, verifica el ID.[/bold red]")
                             continue
 
@@ -563,21 +574,25 @@ while texto_usuario !=5:
                         categoria = categoria.capitalize()
 
                         if categoria not in articulos: #Comprueba que la categora no exista
+                            system("cls")
                             console.print("[bold red]Categoría no encontrada[/bold red]")
                             continue
                             
                         producto = prompt("Introduce el nombre del producto: ", style=style)  #LE pedimos el nombre del producto
                         if producto not in articulos[categoria]:
+                            system("cls")
                             console.print("[bold red]Producto no encontrado[/bold red]")
                             continue
 
                         # Verificar stock
                         if articulos[categoria][producto]['stock'] <= 0:
+                            system("cls")
                             console.print("[bold yellow]No hay stock disponible para este producto[/bold yellow]")
                             continue
 
                         cantidad = int(prompt("Introduce la cantidad a vender: ", style=style))
                         if cantidad > articulos[categoria][producto]['stock']:
+                            system("cls")
                             console.print(f"[bold yellow]Stock insuficiente. Solo hay disponible: {articulos[categoria][producto]['stock']}[/bold yellow]")
                             continue
 
@@ -626,9 +641,9 @@ while texto_usuario !=5:
                             paneles = []
                             for venta in list(ventas.values())[-5:]:  # Últimas 5 ventas
                                 contenido = f"""
-                                [bold]Cliente:[/] {venta['cliente']}
-                                [bold]Producto:[/] {venta['producto']}
-                                [bold]Total:[/] [green]{venta['total']}€[/]
+                                [bold cyan]Cliente:[/] {venta['cliente']}
+                                [bold cyan]Producto:[/] {venta['producto']}
+                                [bold cyan]Total:[/] [green]{venta['total']}€[/]
                                 """
                                 paneles.append(Panel(contenido, border_style="cyan"))
 

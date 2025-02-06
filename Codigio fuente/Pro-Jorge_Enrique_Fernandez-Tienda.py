@@ -198,34 +198,34 @@ clientes = {
 #Diccionario para ir añadiendo los articulos 
 articulos = {
     "Procesadores": {
-        "AMD Ryzen 5": {"precio": 299, "núcleos": 6,  "stock": 50},
-        "Intel Core i7": {"precio": 399, "núcleos": 8,  "stock": 30},
-        "AMD Ryzen 9": {"precio": 799, "núcleos": 16,  "stock": 20}
+        "amd ryzen 5": {"precio": 299, "núcleos": 6,  "stock": 50},
+        "intel core i7": {"precio": 399, "núcleos": 8,  "stock": 30},
+        "amd ryzen 9": {"precio": 799, "núcleos": 16,  "stock": 20}
     },
     "Tarjetas graficas": {
-        "NVIDIA GeForce RTX 3070": {"precio": 599, "VRAM": "8 GB",  "stock": 25},
-        "AMD Radeon RX 6800 XT": {"precio": 649, "VRAM": "16 GB", "stock": 15},
-        "NVIDIA GeForce RTX 3080": {"precio": 699, "VRAM": "10 GB","stock": 10}
+        "nvidia geforce rtx 3070": {"precio": 599, "VRAM": "8 GB",  "stock": 25},
+        "amd radeon rx 6800 xt": {"precio": 649, "VRAM": "16 GB", "stock": 15},
+        "nvidia geforce rtx 3080": {"precio": 699, "VRAM": "10 GB","stock": 10}
     },
     "Memoria ram": {
-        "Corsair": {"precio": 89, "capacidad": "16 GB",  "stock": 100},
-        "G.Skill": {"precio": 159, "capacidad": "32 GB",  "stock": 75},
-        "Crucial": {"precio": 329, "capacidad": "64 GB",  "stock": 40}
+        "corsair": {"precio": 89, "capacidad": "16 GB",  "stock": 100},
+        "g.skill": {"precio": 159, "capacidad": "32 GB",  "stock": 75},
+        "crucial": {"precio": 329, "capacidad": "64 GB",  "stock": 40}
     },
     "Almacenamiento": {
-        "Samsung": {"precio": 179, "tipo": "SSD NVMe", "capacidad": "1 TB", "stock": 60},
-        "Western": {"precio": 59, "tipo": "HDD", "capacidad": "2 TB", "stock": 120},
-        "Crucial": {"precio": 69, "tipo": "SSD SATA", "capacidad": "500 GB", "stock": 80}
+        "samsung": {"precio": 179, "tipo": "SSD NVMe", "capacidad": "1 TB", "stock": 60},
+        "western": {"precio": 59, "tipo": "HDD", "capacidad": "2 TB", "stock": 120},
+        "crucial": {"precio": 69, "tipo": "SSD SATA", "capacidad": "500 GB", "stock": 80}
     },
     "Placas base": {
-        "ASUS": {"precio": 189, "socket": "AM4",  "stock": 40},
-        "MSI": {"precio": 229, "socket": "LGA1200",  "stock": 35},
-        "Gigabyte": {"precio": 209, "socket": "AM4",  "stock": 30}
+        "asus": {"precio": 189, "socket": "AM4",  "stock": 40},
+        "msi": {"precio": 229, "socket": "LGA1200",  "stock": 35},
+        "gigabyte": {"precio": 209, "socket": "AM4",  "stock": 30}
     },
-    "Fuentes de alimentación": {
-        "Corsair": {"precio": 129, "potencia": "750W","stock": 50},
-        "EVGA ": {"precio": 149, "potencia": "850W", "stock": 40},
-        "Seasonic": {"precio": 199, "potencia": "1000W","stock": 25}
+    "Fuentes de alimentacion": {
+        "corsair": {"precio": 129, "potencia": "750W","stock": 50},
+        "evga ": {"precio": 149, "potencia": "850W", "stock": 40},
+        "seasonic": {"precio": 199, "potencia": "1000W","stock": 25}
     }
 }
 
@@ -233,9 +233,9 @@ articulos = {
 #Diccionario para ir añadiendo las ventas 
 ventas = {
     1: {
-        "cliente": "Jorge ",
+        "cliente": "Jorge",
         "categoria": "Procesadores",
-        "producto": "AMD Ryzen 5",
+        "producto": "amd ryzen 5",
         "cantidad": 1,
         "precio_unitario": 299,
         "total": 299
@@ -543,71 +543,59 @@ while texto_usuario !=5:
                     opcion = int(opcion)
 
                     if opcion == 1:  # Añadir producto
-                        # Mostrar categorías disponibles
-                        console.print("[bold cyan]📝 Categorías disponibles:[/]")
-                        for categoria in articulos.keys():
-                            console.print(f"[#ab94de]- {categoria}[/]")
-                        
-                        categoria = prompt("Introduce la categoría del producto: ", style=style).strip()
+                # Mostrar categorías disponibles
+                        console.print("[bold cyan]Categorías disponibles📝:[/]")
+                        for cat in articulos.keys():
+                            console.print(f"[#ab94de]- {cat}[/]")
+
+                        # Pedir la categoría y validarla
+                        categoria = prompt("Introduce la categoría del producto: ", style=style).strip().lower()
 
                         if categoria == "":
-                            console.print(Panel(
-                                          "❌No se aceptan espacios vacios",
-                                          title="Error",
-                                          border_style="red"
-                                          ))
-                        else:
                             system("cls")
-                            console.print(Panel(
-                                          "[red]❌Formato no valido[/]",
-                                          title="Error",
-                                          border_style="red"
-                                          ))
+                            console.print(Panel("❌No se aceptan espacios vacíos",
+                                                title="Error",
+                                                border_style="red"))
                             continue
 
-
+                        # Si la categoría no existe, se crea
                         if categoria not in articulos:
                             articulos[categoria] = {}
-                        #Le pedimos el nombre del producto
+
+                        # Pedir el nombre del producto
                         nombre_producto = prompt("Nombre del producto: ", style=style)
 
-                        #Le pedimos el precio del procucto
-                        precio = prompt("Precio: ", style=style)
-                        #Comprobar que  es un numero
-                        if precio.isdigit() or precio != '':
-                            precio = int(precio)
-                        else:
+                        # Pedir y validar el precio
+                        precio = prompt("Precio: ", style=style).strip()
+                        if precio == "" or not precio.isdigit():
                             system("cls")
-                            console.print(Panel(
-                                          "[red]❌Formato no valido[/]",
-                                          title="Error",
-                                          border_style="red"
-                                          ))
+                            console.print(Panel("[red]❌Formato no válido para el precio[/]",
+                                                title="Error",
+                                                border_style="red"))
                             continue
+                        precio = int(precio)
 
-                        #El stock del producto que vamos a incorporar
-                        stock = prompt("Stock: ", style=style)
-                        #Comprobar que es un numero
-                        if stock.isdigit():
-                            stock = int(stock)
-                        else:
+                        # Pedir y validar el stock
+                        stock = prompt("Stock: ", style=style).strip()
+                        if stock == "" or not stock.isdigit():
                             system("cls")
-                            console.print(Panel(
-                                          "[red]❌Formato no valido[/]",
-                                          title="Error",
-                                          border_style="red"
-                                          ))
+                            console.print(Panel("[red]❌Formato no válido para el stock[/]",
+                                                title="Error",
+                                                border_style="red"))
                             continue
-                        # Añadir producto a la categoría
+                        stock = int(stock)
+
+                        # Añadir el producto a la categoría
                         articulos[categoria][nombre_producto] = {
                             "precio": precio,
                             "stock": stock
                         }
                         console.print("[bold green]✅ Producto añadido correctamente[/bold green]")
 
+
                     elif opcion == 2:  # Eliminar producto
                         # Mostrar categorías
-                        console.print("[bold cyan]📝Categorías disponibles:[/bold cyan]")
+                        console.print("[bold cyan]📝Categorías disponibles📝:[/bold cyan]")
                         for categoria in articulos.keys():
                             console.print(f"- {categoria}")
                         
@@ -679,9 +667,8 @@ while texto_usuario !=5:
         elif texto_usuario == 3:
             
             n_venta = 1  # Contador para las ventas
-
+            #Comenzamos bucle para mostar el menu de ventas
             while True:
-                
                 console.print(menu_panel3)  # Mostrar el menú de ventas
                 opcion = prompt("", style=style)
 
@@ -690,6 +677,7 @@ while texto_usuario !=5:
 
                     if opcion == 1:  # Registrar nueva venta
                         # Validar cliente
+                        system("cls")
                         id_cliente = prompt("Introduce el ID del cliente: ", style=style)
 
                         if id_cliente not in clientes:
@@ -698,8 +686,8 @@ while texto_usuario !=5:
                             continue
 
                         # Mostrar lista de productos disponibles
-                        console.print("[bold cyan]📝Categorías disponibles:[/bold cyan]")
-                        tabla = Table(title="[[blink]]Productos Disponibles[/]", show_header=True, border_style='bold cyan')
+                        console.print("[bold cyan]Categorías disponibles📝:[/bold cyan]")
+                        tabla = Table(title="[blink]Productos Disponibles[/]", show_header=True, border_style='bold cyan')
                         tabla.add_column("Categoría", style="cyan")
                         tabla.add_column("Producto", style="magenta")
                         tabla.add_column("Precio", style="green")
@@ -718,15 +706,17 @@ while texto_usuario !=5:
                         console.print(tabla)
 
                         # Selección de producto
-                        categoria = prompt("Introduce la categoría del producto: ", style=style)
-                        categoria = categoria.capitalize()
+                        categoria = prompt("Introduce la categoría del producto: ", style=style).capitalize()
+                        
 
                         if categoria not in articulos: #Comprueba que la categora no exista
                             system("cls")
-                            console.print("[bold red]🔍❓Categoría no encontrada[/bold red]")
+                            console.print("[bold red]🔍❓Categoría no encontrada[/]")
                             continue
                             
-                        producto = prompt("Introduce el nombre del producto: ", style=style)  #LE pedimos el nombre del producto
+                        producto = prompt("Introduce el nombre del producto: ", style=style).lower()  #LE pedimos el nombre del producto
+                        
+                        
                         if producto not in articulos[categoria]:
                             system("cls")
                             console.print("[bold red]❌Producto no encontrado[/bold red]")
@@ -738,7 +728,16 @@ while texto_usuario !=5:
                             console.print("[bold yellow]📦❌No hay stock disponible para este producto[/bold yellow]")
                             continue
 
-                        cantidad = int(prompt("Introduce la cantidad a vender: ", style=style))
+                        cantidad = prompt("Introduce la cantidad a vender: ", style=style).strip()
+
+                        if cantidad == "":
+                            console.print('[red]❌Incorrecto no se aceptan datos vacios[/]')
+                            continue
+                        elif cantidad.isnumeric():
+                            cantidad = int(cantidad)
+                        else:
+                            console.print('[red]❌Incorrecto introduce una cantidad valida[/]')
+
                         if cantidad > articulos[categoria][producto]['stock']:
                             system("cls")
                             console.print(f"[bold yellow]📦❌Stock insuficiente. Solo hay disponible: {articulos[categoria][producto]['stock']}[/bold yellow]")
@@ -759,15 +758,17 @@ while texto_usuario !=5:
 
                         with Live(console=console, refresh_per_second=4) as live:
                             for i in range(3):
-                                live.update(Panel("[green]✅ Venta registrada con éxito[/]", title="Venta",width=30))
+                                live.update(Panel("[green]✅ Venta registrada con éxito[/]", title="Venta",width=30,border_style="green"))
                                 time.sleep(0.3)
                         n_venta += 1
 
                     elif opcion == 2:  # Eliminar venta
-                        id_venta = prompt("Introduce el número de la venta a eliminar: ", style=style)
-                        
-                        if id_venta.isdigit():
+                        id_venta = prompt("Introduce el número de la venta a eliminar: ", style=style).strip()
 
+                        if id_venta == "":
+                            console.print('[red]❌Incorrecto no se aceptan datos vacios[/]')
+                            continue
+                        elif id_venta.isdigit() :
                             id_venta = int(id_venta)
                             if id_venta in ventas:
                                 venta = ventas[id_venta]
@@ -780,9 +781,9 @@ while texto_usuario !=5:
                                 continue
                         else:
                             console.print('[red]❌Incorrecto introduce un numero[/]')
+                            continue
 
                        
-
                     elif opcion == 3:  # Ver lista de ventas
                         system('cls')
                         if ventas:
@@ -907,6 +908,8 @@ while texto_usuario !=5:
                             console.print(Panel(grid, title=f"🧾Factura #{num}"))
                     elif opcion == 3:
                         break
+                else:
+                    console.print("[bold red]❌Introduce un número válido.[/bold red]")
                 prompt("\nPresiona Enter para continuar...",style=style)
                 system('cls')
     

@@ -506,7 +506,7 @@ while texto_usuario !=5:
                         tabla.add_column("DNI", style="italic cyan", justify="left", no_wrap=True)
                         tabla.add_column("Nombre", style="#FF69B4", justify="center")
                         tabla.add_column("Teléfono", style="bold green", justify="right")
-                        tabla.add_column("Dirrecion", style="bold green", justify="right")
+                        tabla.add_column("Direcion", style="bold green", justify="right")
                         tabla.add_column("Email", style="bold green", justify="center")
 
 
@@ -549,7 +549,7 @@ while texto_usuario !=5:
                             console.print(f"[#ab94de]- {cat}[/]")
 
                         # Pedir la categoría y validarla
-                        categoria = prompt("Introduce la categoría del producto: ", style=style).strip().lower()
+                        categoria = prompt("Introduce la categoría del producto: ", style=style).capitalize().capitalize()
 
                         if categoria == "":
                             system("cls")
